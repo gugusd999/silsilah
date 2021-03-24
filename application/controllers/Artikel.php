@@ -35,7 +35,7 @@ class Artikel extends CI_Controller
         create_session('donaldart', $id);
         $data['idartikel'] = $id;
         $tot = $this->db->query("SELECT * FROM tbl_artikel WHERE artikel_id = '$id' ")->num_rows();
-        // $data['pagin'] = $this->pagination($tot);
+        $data['pagin'] = $this->pagination($tot);
         $data['data'] = $this->db->query("SELECT * FROM tbl_artikel WHERE artikel_id = '$id' ")->result();
         $this->load->view('artikel/artikel', $data);
     }
