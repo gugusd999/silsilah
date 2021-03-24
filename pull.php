@@ -1,4 +1,4 @@
 <?php 
 
     echo "echo";
-    shell_exec("git pull origin master");
+    shell_exec("git pull origin main");
