@@ -595,5 +595,5 @@ $this->load->view("template/navbar");
 
 </main><!-- End #main -->
 <?php
-// $this->load->view("template/footer.php")
+$this->load->view("template/footer.php")
 ?>
