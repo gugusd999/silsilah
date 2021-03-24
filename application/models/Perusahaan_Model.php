@@ -6,11 +6,11 @@ class Perusahaan_Model extends CI_Model
 
     private $table = "perusahaan";
 
-    function get()
+    public function get()
     {
         return $this->db->query("select * from perusahaan where id=1")->row();
     }
-    static function load()
+    public static function load()
     {
         return (new self)->get();
     }
