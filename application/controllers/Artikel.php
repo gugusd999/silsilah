@@ -24,7 +24,7 @@ class Artikel extends CI_Controller
     public function index()
     {
         $el = $this->db->query("SELECT * FROM martikel")->row();
-        $tot = $this->db->query("SELECT * FROM tbl_artikel WHERE artikel_id = '$el->id' ")->num_rows();
+        $tot = $this->db->query("SELECT * FROM tbl_artikel WHERE artikel_id = '$el->id' limit 0, $this->paginbatas ")->num_rows();
         $data['pagin'] = $this->pagination($tot);
         $data['data'] = $this->db->query("SELECT * FROM tbl_artikel WHERE artikel_id = '$el->id' ")->result();
         $this->load->view('artikel/artikel', $data);
