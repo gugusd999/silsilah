@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Artikel extends CI_Controller
 {
-    public $paginbatas = 1;
+    public $paginbatas = 10;
 
     /**
      * Index Page for this controller.
