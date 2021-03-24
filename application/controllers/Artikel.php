@@ -30,13 +30,13 @@ class Artikel extends CI_Controller
         $this->load->view('artikel/artikel', $data);
     }
     
-    public function kategori($id = '')
+    public function kategori($id = '', $position = 0)
     {
         create_session('donaldart', $id);
         $data['idartikel'] = $id;
         $tot = $this->db->query("SELECT * FROM tbl_artikel WHERE artikel_id = '$id' ")->num_rows();
         $data['pagin'] = $this->pagination($tot);
-        $data['data'] = $this->db->query("SELECT * FROM tbl_artikel WHERE artikel_id = '$id' ")->result();
+        $data['data'] = $this->db->query("SELECT * FROM tbl_artikel WHERE artikel_id = '$id'  limit $position, $this->paginbatas ")->result();
         $this->load->view('artikel/artikel', $data);
     }
     
@@ -49,8 +49,11 @@ class Artikel extends CI_Controller
                     <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Previous</a></li>
                 ";
                 for ($i=0; $i < $pepage ; $i++) { 
+                    $idp = generate_session('donaldart');
+                    $idpx = $i * $this->paginbatas;
+                    $links = site_url('artikel/kategori/'.$idp.'/'.$idpx);
                     $c = $i + 1;
-                    $html .= " <li class=\"page-item\"><a class=\"page-link\" href=\"#\">$c</a></li>";
+                    $html .= " <li class=\"page-item\"><a class=\"page-link\" href=\"$links\">$c</a></li>";
                 }
                 $html .= "
                     <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Next</a></li>
