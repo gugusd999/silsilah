@@ -42,7 +42,7 @@ class Artikel extends CI_Controller
     
     public function pagination($tot)
     {
-        $pepage = ceil($tot / $paginbatas);
+        $pepage = ceil($tot / $this->paginbatas);
         $html = "
             <nav aria-label=\"Page navigation example\">
                 <ul class=\"pagination\">
