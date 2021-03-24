@@ -9,7 +9,7 @@ class Perusahaan extends CI_Model
 
     public static function get()
     {
-        return (new self)->mydbr("select * from perusahaan where id = '1' ");
+        return (new self)->mydbr("select * from perusahaan where id = '1' ")[0];
     }
 
 
