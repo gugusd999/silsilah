@@ -3,6 +3,7 @@
 // argument
 
 exec("git add . ");
-exec("git commit -m \"baru\" ");
+$date = date("y-m-d h:i:s");
+exec("git commit -m \"update $date \" ");
 exec("git push -u origin main");
 

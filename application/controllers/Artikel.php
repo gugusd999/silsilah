@@ -25,7 +25,7 @@ class Artikel extends CI_Controller
     {
         $el = $this->db->query("SELECT * FROM martikel")->row();
         $tot = $this->db->query("SELECT * FROM tbl_artikel WHERE artikel_id = '$el->id' ")->num_rows();
-        // $data['pagin'] = $this->pagination($tot);
+        $data['pagin'] = $this->pagination($tot);
         $data['data'] = $this->db->query("SELECT * FROM tbl_artikel WHERE artikel_id = '$el->id' ")->result();
         $this->load->view('artikel/artikel', $data);
     }
@@ -49,9 +49,9 @@ class Artikel extends CI_Controller
                     <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Previous</a></li>
                 ";
                 for ($i=0; $i < 3 ; $i++) { 
-                    $html = " <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Previous</a></li>";
+                    $html .= " <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Previous</a></li>";
                 }
-                $html = "
+                $html .= "
                     <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Previous</a></li>
                 </ul>
             </nav>
