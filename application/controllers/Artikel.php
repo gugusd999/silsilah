@@ -49,10 +49,11 @@ class Artikel extends CI_Controller
                     <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Previous</a></li>
                 ";
                 for ($i=0; $i < 3 ; $i++) { 
-                    $html .= " <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Previous</a></li>";
+                    $c = $i + 1;
+                    $html .= " <li class=\"page-item\"><a class=\"page-link\" href=\"#\">$c</a></li>";
                 }
                 $html .= "
-                    <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Previous</a></li>
+                    <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Next</a></li>
                 </ul>
             </nav>
         ";
