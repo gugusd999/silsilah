@@ -21,11 +21,11 @@
             <div class="row">
 
                 <div class="col-lg-3 col-md-6 footer-contact">
-                    <h3><?= Perusahaan_Model::load()->nama; ?></h3>
+                    <h3><?= Perusahaan::get()->nama; ?></h3>
                     <p>
-                        <?= Perusahaan_Model::load()->alamat; ?>
-                        <strong>Phone:</strong> <?= Perusahaan_Model::load()->hp; ?><br>
-                        <strong>Email:</strong> <?= Perusahaan_Model::load()->email; ?><br>
+                        <?= Perusahaan::get()->alamat; ?>
+                        <strong>Phone:</strong> <?= Perusahaan::get()->hp; ?><br>
+                        <strong>Email:</strong> <?= Perusahaan::get()->email; ?><br>
                     </p>
                 </div>
 
@@ -55,9 +55,9 @@
                     <h4>Sosial Media</h4>
                     <p>Lorem ipsum dolor sit amet consectetur.</p>
                     <div class="social-links mt-3">
-                        <a href="<?= Perusahaan_Model::load()->tw; ?>" class="twitter"><i class="bx bxl-twitter"></i></a>
-                        <a href="<?= Perusahaan_Model::load()->fb; ?>" class="facebook"><i class="bx bxl-facebook"></i></a>
-                        <a href="<?= Perusahaan_Model::load()->ig; ?>" class="instagram"><i class="bx bxl-instagram"></i></a>
+                        <a href="<?= Perusahaan::get()->tw; ?>" class="twitter"><i class="bx bxl-twitter"></i></a>
+                        <a href="<?= Perusahaan::get()->fb; ?>" class="facebook"><i class="bx bxl-facebook"></i></a>
+                        <a href="<?= Perusahaan::get()->ig; ?>" class="instagram"><i class="bx bxl-instagram"></i></a>
                         <!-- <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
                         <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a> -->
                     </div>
