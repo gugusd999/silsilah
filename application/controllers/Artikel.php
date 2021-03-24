@@ -43,24 +43,28 @@ class Artikel extends CI_Controller
     public function pagination($tot)
     {
         $pepage = ceil($tot / $this->paginbatas);
-        $html = "
-            <nav aria-label=\"Page navigation example\">
-                <ul class=\"pagination\">
-                    <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Previous</a></li>
-                ";
-                for ($i=0; $i < $pepage ; $i++) { 
-                    $idp = generate_session('donaldart');
-                    $idpx = $i * $this->paginbatas;
-                    $links = site_url('artikel/kategori/'.$idp.'/'.$idpx);
-                    $c = $i + 1;
-                    $html .= " <li class=\"page-item\"><a class=\"page-link\" href=\"$links\">$c</a></li>";
-                }
-                $html .= "
-                    <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Next</a></li>
-                </ul>
-            </nav>
-        ";
-        return $html;
+        if ($pepage > 0) {
+            $html = "
+                <nav aria-label=\"Page navigation example\">
+                    <ul class=\"pagination\">
+                        <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Previous</a></li>
+                    ";
+                    for ($i=0; $i < $pepage ; $i++) { 
+                        $idp = generate_session('donaldart');
+                        $idpx = $i * $this->paginbatas;
+                        $links = site_url('artikel/kategori/'.$idp.'/'.$idpx);
+                        $c = $i + 1;
+                        $html .= " <li class=\"page-item\"><a class=\"page-link\" href=\"$links\">$c</a></li>";
+                    }
+                    $html .= "
+                        <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Next</a></li>
+                    </ul>
+                </nav>
+            ";
+            return $html;
+        }else{
+            return "";
+        }
     }
 
     public function detail($slug = '')
