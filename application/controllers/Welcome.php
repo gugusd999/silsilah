@@ -27,6 +27,8 @@ class Welcome extends CI_Controller
 	public function gulp()
 	{
 		echo 'test';
+		$cc = Perusahaan::get();
+		var_dump($cc);
 	}
 
 
