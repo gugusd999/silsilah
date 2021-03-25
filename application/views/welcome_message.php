@@ -11,8 +11,8 @@ $this->load->view("template/navbar");
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-7 pt-4 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
-				<h1>Lorem ipsum dolor sit amet.</h1>
-				<h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis perspiciatis, deserunt corrupti distinctio earum dolore, obcaecati odit eveniet reprehenderit veniam iure labore neque iste ipsam.</h2>
+				<h1>SILSILAH KELUARGA ANDA</h1>
+				<h2>Abadikan garis keturunan Anda menggunakan pohon silsilah. Ideal untuk reuni keluarga, dibagikan dengan kakak-adik, atau dicetak untuk dipajang di dinding.</h2>
 
 			</div>
 			<div class="col-lg-5 order-1 order-lg-2 hero-img">
