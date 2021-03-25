@@ -13,7 +13,6 @@ $this->load->view("template/navbar");
 			<div class="col-lg-7 pt-4 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
 				<h1>SILSILAH KELUARGA ANDAs</h1>
 				<h2>Abadikan garis keturunan Anda menggunakan pohon silsilah. Ideal untuk reuni keluarga, dibagikan dengan kakak-adik, atau dicetak untuk dipajang di dinding.</h2>
-
 			</div>
 			<div class="col-lg-5 order-1 order-lg-2 hero-img">
 				<h3 class="text-center">Daftar</h3>
@@ -64,14 +63,12 @@ $this->load->view("template/navbar");
 	<!-- ======= About Section ======= -->
 	<section id="about" class="about">
 		<div class="container">
-
 			<div class="row">
 				<div class="col-xl-5 col-lg-6 d-flex justify-content-center video-box align-items-stretch">
 					<a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a>
 				</div>
-
 				<div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-center py-5 px-lg-5">
-					<h3>Mulai Buat Silsilah Keluarga</h3>
+					<h3>Mulai Buat Silsilah Keluarga y</h3>
 					<p>Cerita Keluarga anda bermulai dari sebuah silsilah. Mulai cerita itu dengan mengisi nama, tanggal lahir, foto dan keterangan tentang Keluarga anda . Arsipkan sekarang juga silsilah Keluarga anda, karena kalau bukan sekarang, kapan lagi ?</p>
 					<div class="icon-box">
 						<div class="icon"><i class="bx bx-fingerprint"></i></div>
