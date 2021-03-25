@@ -16,13 +16,6 @@
           <div class="row">
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                   <div class="email-statis-inner notika-shadow">
-                  <?php
-                    link_button([
-                      "link" => "admin/tree/tambah_data",
-                      "class" => "btn btn-success",
-                      "text" => "Tambah Data",
-                    ]);
-                  ?>
                   <hr>
                       <?= $datatable ?>
                   </div>

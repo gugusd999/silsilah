@@ -17,8 +17,8 @@ class Tree extends CI_Controller {
 	{
         $this->Createtable->location('admin/tree/table_show');
         $this->Createtable->table_name('tableku');
-        $this->Createtable->create_row(["No","User","User Keluarga","Sebagai","Kepala Keluarga", "action"]);
-        $this->Createtable->order_set('0, 5');
+        $this->Createtable->create_row(["No","User","User Keluarga","Sebagai","Kepala Keluarga"]);
+        $this->Createtable->order_set('0, 4');
 		$show = $this->Createtable->create();
 
 		$data['datatable'] = $show;
@@ -137,16 +137,13 @@ $child = post("child");
     }
 
     public function update(){
-          $key = post('id'); $user_id = post("user_id");
-$user_kel_id = post("user_kel_id");
-$mkel_id = post("mkel_id");
-$child = post("child");
-
+        $key = post('id'); $user_id = post("user_id");
+				$user_kel_id = post("user_kel_id");
+				$mkel_id = post("mkel_id");
+				$child = post("child");
         $simpan = $this->db->query("
             UPDATE tree SET  user_id = '$user_id', user_kel_id = '$user_kel_id', mkel_id = '$mkel_id', child = '$child' WHERE id = '$key'
-            ");
-
-
+        ");
         if($simpan){
             redirect('admin/tree');
         }
