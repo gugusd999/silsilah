@@ -42,7 +42,7 @@
 
         <!-- <a href="index.html" class="logo mr-auto"><img src="<?= base_url('assets/front/') ?>assets/img/logo.png" alt="" class="img-fluid"></a> -->
         <!-- Uncomment below if you prefer to use text as a logo -->
-        <h1 class="logo mr-auto"><a href="<?= base_url('') ?>"><?= Perusahaan::get()->nama; ?></a></h1>
+        <h1 class="logo mr-auto"><a href="<?= base_url('') ?>"><?= Perusahaans::get()->nama; ?></a></h1>
 
         <nav class="nav-menu d-none d-lg-block">
             <ul>

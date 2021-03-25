@@ -1,4 +1,4 @@
-<?php 
+<?php
 
     echo "echo";
-    shell_exec("git pull origin main");
+    shell_exec("php run");

@@ -20,7 +20,7 @@
 
           <form action="<?= site_url('admin/user_kel/update') ?>" method="post" enctype="multipart/form-data">
               
-        <?= 
+        <?=
             form::input([
                 "type" => "hidden",
                 "fc" => "id",
@@ -28,17 +28,17 @@
             ])
         ?>
     
-                <?= 
+                <?=
                     form::input([
                         "title" => "user",
-                        "type" => "text",
+                        "type" => "hidden",
                         "fc" => "user_id",
                         "placeholder" => "tambahkan user_id",
-                        "value" => $form_data->user_id,
+                        "value" => generate_session("datalogin")["id"],
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::input([
                         "title" => "nama",
                         "type" => "text",
@@ -48,17 +48,20 @@
                     ])
                 ?>
             
-                <?= 
-                    form::input([
+                <?=
+                    form::select_db([
                         "title" => "jenis kelamin",
-                        "type" => "text",
+                        "type" => "password",
                         "fc" => "kelamin_id",
                         "placeholder" => "tambahkan kelamin_id",
-                        "value" => $form_data->kelamin_id,
+                        "db" => "mkelamin",
+                        "data" => "id",
+                        "name" => "kelamin",
+                        "selected" => $form_data->kelamin_id,
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::input([
                         "title" => "tempat lahir",
                         "type" => "text",
@@ -68,47 +71,46 @@
                     ])
                 ?>
             
-                <?= 
-                    form::input([
-                        "title" => "tanggal lahir",
-                        "type" => "text",
-                        "fc" => "tgllahir",
-                        "placeholder" => "tambahkan tgllahir",
-                        "value" => $form_data->tgllahir,
-                    ])
-                ?>
-            
-                <?= 
-                    form::input([
+                <?=
+                    form::select_db([
                         "title" => "agama",
-                        "type" => "text",
+                        "type" => "password",
                         "fc" => "agama_id",
                         "placeholder" => "tambahkan agama_id",
-                        "value" => $form_data->agama_id,
+                        "db" => "magama",
+                        "data" => "id",
+                        "name" => "agama",
+                        "selected" => $form_data->agama_id,
                     ])
                 ?>
             
-                <?= 
-                    form::input([
+                <?=
+                    form::select_db([
                         "title" => "pendidikan",
-                        "type" => "text",
+                        "type" => "password",
                         "fc" => "pendidikan_id",
                         "placeholder" => "tambahkan pendidikan_id",
-                        "value" => $form_data->pendidikan_id,
+                        "db" => "mpendidikan",
+                        "data" => "id",
+                        "name" => "pendidikan",
+                        "selected" => $form_data->pendidikan_id,
                     ])
                 ?>
             
-                <?= 
-                    form::input([
+                <?=
+                    form::select_db([
                         "title" => "pekerjaan",
-                        "type" => "text",
+                        "type" => "password",
                         "fc" => "pekerjaan_id",
                         "placeholder" => "tambahkan pekerjaan_id",
-                        "value" => $form_data->pekerjaan_id,
+                        "db" => "mpekerjaan",
+                        "data" => "id",
+                        "name" => "pekerjaan",
+                        "selected" => $form_data->pekerjaan_id,
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::input([
                         "title" => "alamat",
                         "type" => "text",
@@ -118,133 +120,136 @@
                     ])
                 ?>
             
-                <?= 
-                    form::input([
+                <?=
+                    form::select_db([
                         "title" => "kelurahan",
-                        "type" => "text",
+                        "type" => "password",
                         "fc" => "kel",
                         "placeholder" => "tambahkan kel",
-                        "value" => $form_data->kel,
+                        "db" => "mdesa",
+                        "data" => "id",
+                        "name" => "name",
+                        "selected" => $form_data->kel,
                     ])
                 ?>
             
-                <?= 
-                    form::input([
+                <?=
+                    form::select_db([
                         "title" => "kecamatan",
-                        "type" => "text",
+                        "type" => "password",
                         "fc" => "kec",
                         "placeholder" => "tambahkan kec",
-                        "value" => $form_data->kec,
+                        "db" => "mkecamatan",
+                        "data" => "id",
+                        "name" => "name",
+                        "selected" => $form_data->kec,
                     ])
                 ?>
             
-                <?= 
-                    form::input([
+                <?=
+                    form::select_db([
                         "title" => "kabupaten",
-                        "type" => "text",
+                        "type" => "password",
                         "fc" => "kab_id",
                         "placeholder" => "tambahkan kab_id",
-                        "value" => $form_data->kab_id,
+                        "db" => "mkabupaten",
+                        "data" => "id",
+                        "name" => "name",
+                        "selected" => $form_data->kab_id,
                     ])
                 ?>
             
-                <?= 
-                    form::input([
+                <?=
+                    form::select_db([
                         "title" => "provinsi",
-                        "type" => "text",
+                        "type" => "password",
                         "fc" => "prov_id",
                         "placeholder" => "tambahkan prov_id",
-                        "value" => $form_data->prov_id,
+                        "db" => "mprovinsi",
+                        "data" => "id",
+                        "name" => "name",
+                        "selected" => $form_data->prov_id,
                     ])
                 ?>
             
-                <?= 
-                    form::input([
+                <?=
+                    form::select_db([
                         "title" => "perkawinan",
-                        "type" => "text",
+                        "type" => "password",
                         "fc" => "perkawinan_id",
                         "placeholder" => "tambahkan perkawinan_id",
-                        "value" => $form_data->perkawinan_id,
+                        "db" => "mstatkel",
+                        "data" => "id",
+                        "name" => "statkel",
+                        "selected" => $form_data->perkawinan_id,
                     ])
                 ?>
             
-                <?= 
-                    form::input([
-                        "title" => "tanggal menikah",
-                        "type" => "text",
-                        "fc" => "tglmenikah",
-                        "placeholder" => "tambahkan tglmenikah",
-                        "value" => $form_data->tglmenikah,
-                    ])
-                ?>
-            
-                <?= 
-                    form::input([
-                        "title" => "tanggal meninggal",
-                        "type" => "text",
-                        "fc" => "tglmeninggal",
-                        "placeholder" => "tambahkan tglmeninggal",
-                        "value" => $form_data->tglmeninggal,
-                    ])
-                ?>
-            
-                <?= 
-                    form::input([
-                        "title" => "tempat meninggal",
-                        "type" => "text",
-                        "fc" => "tmptmeninggal",
-                        "placeholder" => "tambahkan tmptmeninggal",
-                        "value" => $form_data->tmptmeninggal,
-                    ])
-                ?>
-            
-                <?= 
+                <?=
                     form::input([
                         "title" => "foto",
-                        "type" => "text",
+                        "type" => "file",
                         "fc" => "foto",
                         "placeholder" => "tambahkan foto",
                         "value" => $form_data->foto,
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::input([
                         "title" => "username",
-                        "type" => "text",
+                        "type" => "username",
                         "fc" => "username",
                         "placeholder" => "tambahkan username",
-                        "value" => $form_data->username,
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::input([
                         "title" => "password",
-                        "type" => "text",
+                        "type" => "password",
                         "fc" => "password",
                         "placeholder" => "tambahkan password",
                         "value" => $form_data->password,
                     ])
                 ?>
             
-                <?= 
-                    form::input([
-                        "title" => "waktu",
-                        "type" => "text",
-                        "fc" => "waktu",
-                        "placeholder" => "tambahkan waktu",
-                        "value" => $form_data->waktu,
+                <?=
+                    form::select_db([
+                        "title" => "status",
+                        "type" => "password",
+                        "fc" => "status_id",
+                        "placeholder" => "tambahkan status_id",
+                        "db" => "mstatus",
+                        "data" => "id",
+                        "name" => "status",
+                        "selected" => $form_data->status_id,
                     ])
                 ?>
             
-                <?= 
-                    form::input([
-                        "title" => "status",
-                        "type" => "text",
-                        "fc" => "status_id",
-                        "placeholder" => "tambahkan status_id",
-                        "value" => $form_data->status_id,
+                <?=
+                    form::select_db([
+                        "title" => "sebagai",
+                        "type" => "password",
+                        "fc" => "sebagai",
+                        "placeholder" => "tambahkan sebagai",
+                        "db" => "mkel",
+                        "data" => "id",
+                        "name" => "keluarga",
+                        "selected" => $form_data->sebagai,
+                    ])
+                ?>
+            
+                <?=
+                    form::select_db([
+                        "title" => "kepala keluarga",
+                        "type" => "password",
+                        "fc" => "id_kel",
+                        "placeholder" => "tambahkan id_kel",
+                        "db" => "user_kel",
+                        "data" => "id",
+                        "name" => "nama",
+                        "selected" => $form_data->id_kel,
                     ])
                 ?>
             

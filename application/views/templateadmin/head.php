@@ -1,8 +1,13 @@
 <?php
         $statususer = generate_session('login');
         $active = explode("/",$_SERVER['PATH_INFO']);
-        $active = $active[2];
+        if (!isset($active[2])) {
+          $active = $active[1];
+        }else{
+          $active = $active[2];
+        }
         $menu = [
+            "Home" => "home",
             "Master" => [
                 "Agama" => "magama",
                 "Artikiel" => "martikel",
@@ -32,8 +37,9 @@
             "Service" => "service",
             "Testimony" => "testimony",
         ];
-        
+
         $icon = [
+            "Home" => "fa fa-home",
             "Master" => "fa fa-tags",
             "Tabel" => "fas fa-table",
             "Perusahaan" => "far fa-building",
@@ -47,6 +53,7 @@
         ];
 
         $auth = [
+            "Home" => "user",
             "Master" => [
                 "Agama" => "admin",
                 "Artikiel" => "admin",
@@ -104,7 +111,6 @@
 
             $cc = null;
 
-
             foreach ($obj1 as $key => $value) {
                 if (is_array($data[$value])) {
                     foreach(array_keys($data[$value]) as $key => $datas ) {
@@ -128,29 +134,36 @@
 
             $cc = null;
 
-
-            foreach ($obj1 as $key => $value) {
+            if ($active == 'home') {
+              return redirect('home');
+            }else{
+              foreach ($obj1 as $key => $value) {
                 if (is_array($data[$value])) {
-                    foreach(array_keys($data[$value]) as $key => $datas ) {
-                        if ($auth[$value][$datas] == $active) {
-                            return redirect('admin/'.$data[$value][$datas]);
-                        }
+                  foreach(array_keys($data[$value]) as $key => $datas ) {
+                    if ($auth[$value][$datas] == $active) {
+                      return redirect('admin/'.$data[$value][$datas]);
                     }
+                  }
                 }else{
-                    if ($auth[$value] == $active) {
-                        return redirect('admin/'.$data[$value]);
-                    }
+                  if ($auth[$value] == $active) {
+                    return redirect('admin/'.$data[$value]);
+                  }
                 }
 
+              }
             }
             return $cc;
+
         }
 
         $cek = cekarraylistcontainactivekey($active, $menu, $auth);
 
-
         if (generate_session('login') != $cek) {
+          if ($active == 'home') {
+
+          }else{
             callbacktoadmin(generate_session('login'), $menu, $auth);
+          }
         }
 
 
@@ -171,7 +184,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <!-- favicon
-    
+
 		============================================ -->
     <link rel="shortcut icon" type="image/x-icon" href="<?= base_url('');?>assets/notika/img/favicon.ico">
     <!-- Google Fonts
@@ -248,14 +261,14 @@
     <!-- responsive CSS
 		============================================ -->
     <link rel="stylesheet" href="<?= base_url('')?>assets/notika/css/responsive.css">
-    
+
     <!-- from notika -->
-    
+
     <!-- End Footer area-->
     <link rel="stylesheet" href="<?= base_url('')?>assets/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="<?= base_url('')?>assets/responsive.bootstrap4.min.css">
     <!-- jquery
-    
+
 		============================================ -->
     <script src="<?= base_url('')?>assets/notika/js/vendor/jquery-1.12.4.min.js"></script>
     <script src="<?= base_url('')?>assets/notika/js/data-table/jquery.dataTables.min.js"></script>
@@ -320,7 +333,7 @@
     <script src="<?= base_url('')?>assets/notika/js/todo/jquery.todo.js"></script>
     <script src="<?= base_url('')?>assets/notika/js/autosize.min.js"></script>
     <!-- plugins JS
-    
+
 		============================================ -->
     <script src="<?= base_url('')?>assets/notika/js/plugins.js"></script>
 	<!--  Chat JS
@@ -353,7 +366,7 @@
 
             .paginate_button.active a{
             color: #9ca8eb !important;
-            } 
+            }
         </style>
 
 
@@ -523,7 +536,7 @@
                         <?php foreach(array_keys($menu) as $key => $val) : ?>
                             <?php if($val == $menuactive) : ?>
                                     <?php if(is_array($menu[$val])) : ?>
-                                            <?php 
+                                            <?php
                                                 $cekstat = null;
                                                 foreach(array_keys($menu[$val]) as $elm => $ecw){
                                                     if ($auth[$val][$ecw] == $statususer) {
@@ -535,22 +548,30 @@
                                             <?php if($statususer == $cekstat) : ?>
                                                 <li class="active">
                                                     <a data-toggle="tab" href="#<?= str_replace(" ","-",$val); ?>"><i class="<?= $icon[$val] ?>"></i>
-                                                        <?= $val ?> 
+                                                        <?= $val ?>
                                                     </a>
                                                 </li>
                                             <?php endif ?>
                                         <?php else : ?>
                                             <?php if($statususer == $auth[$val]) : ?>
-                                            <li class="active">
-                                                <a href="<?= site_url('admin/').$menu[$val]; ?>"><i class="<?= $icon[$val] ?>"></i>
-                                                    <?= $val ?> 
-                                                </a>
-                                            </li>
+                                              <?php if ($val == "Home"): ?>
+                                                  <li class="active">
+                                                    <a href="<?= site_url('/').$menu[$val]; ?>"><i class="<?= $icon[$val] ?>"></i>
+                                                      <?= $val ?>
+                                                    </a>
+                                                  </li>
+                                                <?php else: ?>
+                                                  <li class="active">
+                                                    <a href="<?= site_url('admin/').$menu[$val]; ?>"><i class="<?= $icon[$val] ?>"></i>
+                                                      <?= $val ?>
+                                                    </a>
+                                                  </li>
+                                              <?php endif; ?>
                                             <?php endif ?>
                                     <?php endif; ?>
                                 <?php else : ?>
                                     <?php if(is_array($menu[$val])) : ?>
-                                            <?php 
+                                            <?php
                                                 $cekstat = null;
                                                 foreach(array_keys($menu[$val]) as $elm => $ecw){
                                                     if ($auth[$val][$ecw] == $statususer) {
@@ -562,17 +583,25 @@
                                             <?php if($statususer == $cekstat) : ?>
                                             <li>
                                                 <a data-toggle="tab" href="#<?= str_replace(" ","-",$val); ?>"><i class="<?= $icon[$val] ?>"></i>
-                                                    <?= $val ?> 
+                                                    <?= $val ?>
                                                 </a>
                                             </li>
                                             <?php endif ?>
                                         <?php else : ?>
                                             <?php if($statususer == $auth[$val]) : ?>
-                                            <li>
-                                                <a href="<?= site_url('admin/').$menu[$val]; ?>"><i class="<?= $icon[$val] ?>"></i>
-                                                    <?= $val ?> 
-                                                </a>
-                                            </li>
+                                              <?php if ($val == "Home"): ?>
+                                                  <li>
+                                                    <a href="<?= site_url('/').$menu[$val]; ?>"><i class="<?= $icon[$val] ?>"></i>
+                                                      <?= $val ?>
+                                                    </a>
+                                                  </li>
+                                                <?php else: ?>
+                                                  <li>
+                                                    <a href="<?= site_url('admin/').$menu[$val]; ?>"><i class="<?= $icon[$val] ?>"></i>
+                                                      <?= $val ?>
+                                                    </a>
+                                                  </li>
+                                              <?php endif; ?>
                                             <?php endif ?>
                                     <?php endif; ?>
                             <?php endif; ?>

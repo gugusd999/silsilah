@@ -29,8 +29,8 @@ function generate_session($name = "", $defaultnull = "")
 
 function iduser($name = "", $defaultnull = "")
 {
-    if(generate_session('login') != ''){
-        return generate_session('login')[0];
+    if(generate_session('loginid') != ''){
+        return generate_session('loginid');
     }else{
         return '';
     }

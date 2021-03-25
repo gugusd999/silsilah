@@ -137,7 +137,7 @@ class Datatable_gugus extends CI_Model{
         $theTable = $this->query_limit()->result();
         $show_table = $this->table_row;
         $key_id = $this->key;
-		
+
 		foreach($theTable as $key => $value){
             $child = [];
             $child[] = $this->startfrom + $key + 1;
@@ -207,7 +207,12 @@ class Datatable_gugus extends CI_Model{
 									$qr .= " AND ".$ccg." = '".$value->$cf."' ";
 								}
 							}
-							$child[] = $this->db->query($qr)->row()->$getd;
+              $cl = $this->db->query($qr)->row();
+              if ($cl != NULL) {
+                $child[] = $cl->$getd;
+              }else{
+                $child[] = '';
+              }
 						}
 					}else{
 						$child[] = $value->$variable;

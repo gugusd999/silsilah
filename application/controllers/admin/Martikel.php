@@ -114,7 +114,7 @@ class Martikel extends CI_Controller {
         
 
         $simpan = $this->db->query("
-            INSERT INTO martikel            
+            INSERT INTO martikel
             (artikel) VALUES ('$artikel')
         ");
     

@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 class Createtable extends CI_Model{
-    
+
 
     private $table_name;
     private $target_table;
@@ -20,7 +20,6 @@ class Createtable extends CI_Model{
                 }
             })
         ";
-
         return $html;
     }
 
@@ -37,18 +36,16 @@ class Createtable extends CI_Model{
     public function set_delete($aa){
         $this->option_delete = $aa;
     }
-    
+
     public function set_update($aa){
         $this->option_update = $aa;
     }
 
     private function create_delete_action(){
         $html = '
-            $("#'.$this->table_name.' tbody").on("click", ".delete",function(){
+            $(document).on("click", ".delete",function(){
                 event.preventDefault();
                 var dataId = $(this).attr("data-id");
-                
-
                 swal({
                   title: "Hapus Data",
                   text: "Anda yakin ingin menghapus data ini",
@@ -81,7 +78,7 @@ class Createtable extends CI_Model{
 
     private function create_update_action(){
         $html = '
-            $("#'.$this->table_name.' tbody").on("click", ".edit",function(){
+            $(document).on("click", ".edit",function(){
                 event.preventDefault();
                 var dataId = $(this).attr("data-id");
                 location.href = "'.site_url($this->table_location).'/update/"+dataId;
@@ -105,7 +102,7 @@ class Createtable extends CI_Model{
 
     public function create()
     {
-        $html = 
+        $html =
         '
         <table id="'.$this->table_name.'" class="table table-striped" style="width:100%">
                     <thead>
@@ -114,17 +111,17 @@ class Createtable extends CI_Model{
                         </tr>
                     </thead>
                     <tbody>
-                        
+
                     </tbody>
                 </table>
                 <script>
-                    
-                    
+
+
                     '.$this->config_csrf().'
-                    
+
 
                     var '.$this->table_name.' = null;
-    
+
                     $(document).ready(function(){
                         '.$this->table_name.' = $("#'.$this->table_name.'").DataTable({
                             responsive: {
@@ -157,7 +154,7 @@ class Createtable extends CI_Model{
                         })
 
                         '.$this->create_update_action().'
-                        
+
                         '.$this->create_delete_action().'
 
 
@@ -170,9 +167,9 @@ class Createtable extends CI_Model{
                             th.style.minWidth = "180px";
                         }
                     })
-    
+
                 </script>
-        
+
         ';
         return $html;
     }

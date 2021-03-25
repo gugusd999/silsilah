@@ -4,6 +4,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Home extends CI_Controller
 {
 
+    public function __construct()
+    {
+      parent::__construct();
+          Cek_login::ceklogin();
+          $this->load->model('Createtable');
+          $this->load->model('Datatable_gugus');
+    }
     /**
      * Index Page for this controller.
      *
@@ -21,7 +28,9 @@ class Home extends CI_Controller
      */
     public function index()
     {
-        $this->load->view('back/home');
+      $this->load->view('templateadmin/head');
+      $this->load->view('admin');
+      $this->load->view('templateadmin/footer');
     }
     public function detail()
     {

@@ -30,15 +30,18 @@ class User extends CI_Controller {
 	public function table_show($action = 'show', $keyword = '')
 	{
 		if ($action == "show") {
-        
+
             if (isset($_POST['order'])): $setorder = $_POST['order']; else: $setorder = ''; endif;
 
             $this->Datatable_gugus->datatable(
                 [
                     "table" => $this->table1,
                     "select" => [
-						"*"
-					],
+											"*"
+										],
+										"where" => [
+												["id", '=', iduser()]
+										],
                     'limit' => [
                         'start' => post('start'),
                         'end' => post('length')
@@ -58,7 +61,7 @@ class User extends CI_Controller {
                         'order-data' => $setorder,
                         'order-option' => [ "1"=>"username", "2"=>"password", "3"=>"nama", "4"=>"hp", "5"=>"namaayah", "6"=>"namaibu", "7"=>"email", "8"=>"status_id", "9"=>"created_at", "10"=>"updated_at"],
                     ],
-                    
+
                 ]
             );
             $this->Datatable_gugus->table_show();
@@ -91,13 +94,13 @@ $namaibu = post("namaibu");
 $email = post("email");
 $status_id = post("status_id");
 
-        
+
 
         $simpan = $this->db->query("
-            INSERT INTO user            
+            INSERT INTO user
             (username,password,nama,hp,namaayah,namaibu,email,status_id) VALUES ('$username','$password','$nama','$hp','$namaayah','$namaibu','$email','$status_id')
         ");
-    
+
 
         if($simpan){
             redirect('admin/user');
@@ -117,11 +120,11 @@ $status_id = post("status_id");
         $simpan = $this->db->query("
             UPDATE user SET  username = '$username', password = '$password', nama = '$nama', hp = '$hp', namaayah = '$namaayah', namaibu = '$namaibu', email = '$email', status_id = '$status_id' WHERE id = '$key'
             ");
-    
+
 
         if($simpan){
             redirect('admin/user');
         }
     }
-    
+
 }

@@ -11,7 +11,7 @@ $this->load->view("template/navbar");
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-7 pt-4 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
-				<h1>SILSILAH KELUARGA ANDA tes</h1>
+				<h1>SILSILAH KELUARGA ANDA</h1>
 				<h2>Abadikan garis keturunan Anda menggunakan pohon silsilah. Ideal untuk reuni keluarga, dibagikan dengan kakak-adik, atau dicetak untuk dipajang di dinding.</h2>
 
 			</div>
@@ -122,8 +122,6 @@ $this->load->view("template/navbar");
 					<span data-toggle="counter-up">1,463</span>
 					<p>Pohon Keluarga</p>
 				</div>
-
-
 
 			</div>
 

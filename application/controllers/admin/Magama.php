@@ -87,7 +87,7 @@ class Magama extends CI_Controller {
         
 
         $simpan = $this->db->query("
-            INSERT INTO magama            
+            INSERT INTO magama
             (agama) VALUES ('$agama')
         ");
     

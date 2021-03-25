@@ -31,9 +31,11 @@ class Login extends CI_Controller
 		$username = $_POST['username'];
 		$password = md5(md5($_POST['password']));
 		$cek = $this->db->query("SELECT * FROM user WHERE username = '$username' AND password = '$password' ")->num_rows();
+		$cek2 = $this->db->query("SELECT * FROM user WHERE username = '$username' AND password = '$password' ")->row();
 		if ($cek > 0) {
+			create_session('loginid', $cek2->id);
 			create_session('login', 'user');
-			return redirect('admin/magama');
+			return redirect('home');
 		}else{
 			return redirect('login');
 		}
@@ -50,16 +52,16 @@ class Login extends CI_Controller
 		$email = post("email");
 		$status_id = post("status_id");
 
-        $simpan = $this->db->query("
-            INSERT INTO user            
-            (username,password,nama,hp,namaayah,namaibu,email,status_id) VALUES ('$username','$password','$nama','$hp','$namaayah','$namaibu','$email','$status_id')
-        ");
+    $simpan = $this->db->query("
+        INSERT INTO user
+        (username,password,nama,hp,namaayah,namaibu,email,status_id) VALUES ('$username','$password','$nama','$hp','$namaayah','$namaibu','$email','$status_id')
+    ");
 
 		if($simpan){
+			$getid = $this->db->query("SELECT * FROM user ORDER BY id DESC")->row()->id;
+			create_session('loginid', $getid);
 			create_session('login', 'user');
 			redirect('admin/user');
 		}
 	}
-
-
 }

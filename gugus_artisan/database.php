@@ -1,13 +1,13 @@
-<?php 
+<?php
 
 
 class Database {
-    
+
 	private $namaApss = "Magic-Framework";
-	private $hostname = 'localhost'; 
-    private $username = 'root'; 
-    private $password = ''; 
-    public $database = 'silsilah'; 
+	private $hostname = '153.92.10.48';
+    private $username = 'u4960381_silsilah';
+    private $password = 'silsilah';
+    public $database = 'u4960381_silsilah2'; 
 
     private $encryp = "awesomeframeworkwithgugus";
     private $type_data = "utf8";
@@ -68,7 +68,7 @@ class Database {
             if($value->nama_kolom == $this->get_primary_key($nama_table)){
             }else{
                 $html .= '
-                <?= 
+                <?=
                   form::input([
                     "title" => "'.str_replace("_", " ", $value->nama_kolom).'",
                     "type" => "text",
@@ -105,7 +105,7 @@ class Database {
                 ';
             }else{
                 $html .= '
-                <?= 
+                <?=
                   form::input([
                     "title" => "'.str_replace("_", " ", $value->nama_kolom).'",
                     "type" => "text",
@@ -135,24 +135,24 @@ class Database {
         ");
 
         $html = '';
-        
+
         foreach($data as $key => $value){
-            
+
             if($value->nama_kolom == $this->get_primary_key($nama_table)){
             }else{
                 $html .= '
                 $'.$value->nama_kolom.' = post("'.$value->nama_kolom.'");';
             }
         }
-        
+
         $html .= '
         $simpan = $this->db->query('."'".'
-            INSERT INTO '.$nama_table.'            
+            INSERT INTO '.$nama_table.'
             ';
-            
+
         $html .= '(';
             foreach($data as $key => $value){
-                
+
                 if($value->nama_kolom == $this->get_primary_key($nama_table)){
                 }else{
                     $html .= ','.$value->nama_kolom;
@@ -162,7 +162,7 @@ class Database {
             $html .= 'VALUES';
             $html .= '(';
                 foreach($data as $key => $value){
-                    
+
                     if($value->nama_kolom == $this->get_primary_key($nama_table)){
                     }else{
                         $html .= ',"'."'.$".$value->nama_kolom.".'".'"';
@@ -190,24 +190,24 @@ class Database {
         ");
 
         $html = '';
-        
+
         foreach($data as $key => $value){
-            
+
             if($value->nama_kolom == $this->get_primary_key($nama_table)){
             }else{
                 $html .= '
                 $'.$value->nama_kolom.' = post("'.$value->nama_kolom.'");';
             }
         }
-        
+
         $html .= '
         $simpan = $this->db->query('."'".'
-            UPDATE '.$nama_table.' SET            
+            UPDATE '.$nama_table.' SET
             ';
-            
+
                 $html .= 'edit';
                 foreach($data as $key => $value){
-                    
+
                     if($value->nama_kolom == $this->get_primary_key($nama_table)){
                     }else{
                         $html .= ', '.$value->nama_kolom.' = "'."'.$".$value->nama_kolom.".'".'"';
@@ -257,7 +257,7 @@ class Database {
 
         $custome = "[";
         $custome_order = "[";
-        
+
         foreach ($data as $key => $value) {
             if($key == 0){
                 if($data_arr != ""){
@@ -310,7 +310,7 @@ class Database {
                 }
             }
         }
-        
+
         $custome .= "]";
         $custome_order .= "]";
 
@@ -394,7 +394,7 @@ class Database {
                 foreach ($tablestruktur as $key => $value) {
                     if ($this->cekColumn($table, $no) == 0) {
                         $this->query("
-                            
+
                             ALTER TABLE ".$table."
                             ADD ".$key." ".$value.";
 
@@ -402,7 +402,7 @@ class Database {
                     }else{
                         if ($this->getColumnName($table, $no) != $key) {
                             $this->query("
-                            
+
                                 ALTER TABLE ".$table."
                                 CHANGE COLUMN ".$this->getColumnName($table, $no)." ".$key." ".$value.";
 
@@ -484,19 +484,19 @@ class Database {
         SELECT
             COLUMN_NAME
         FROM
-            information_schema.KEY_COLUMN_USAGE 
+            information_schema.KEY_COLUMN_USAGE
         WHERE
-            TABLE_SCHEMA = '".$this->database."' 
+            TABLE_SCHEMA = '".$this->database."'
             AND TABLE_NAME = '".$table."'
             AND CONSTRAINT_NAME = 'PRIMARY'
-        
+
         ");
 
         return $data->COLUMN_NAME;
     }
 
 
-    // ambil data secara arrray 
+    // ambil data secara arrray
     public function query_result_assoc($e)
     {
         $conn = $this->getDepartment();
@@ -518,7 +518,7 @@ class Database {
         }
         return count($box);
     }
-    // nah ini rumusnya tadi 
+    // nah ini rumusnya tadi
     public function sql_like_table($arr, $search){
         $table_row_data = "";
         $table_row_data .= "(";
@@ -568,7 +568,7 @@ class Database {
         $data_keys .= ")";
         $data_keys .= " VALUES ";
         $nilai_data = "(";
-        for ($i=0; $i < count($data_arr); $i++) { 
+        for ($i=0; $i < count($data_arr); $i++) {
             if ($i == 0) {
                 $nilai_data .= '"'.$data_arr[$keys[$i]].'"';
             }else{
@@ -590,7 +590,7 @@ class Database {
         $name_of_query = "UPDATE ";
         $namaTable = $table;
         $nilai_data = " SET ";
-        for ($i=0; $i < count($data_arr); $i++) { 
+        for ($i=0; $i < count($data_arr); $i++) {
             if ($i == 0) {
                 $nilai_data .= $keys[$i].' = "'.$data_arr[$keys[$i]].'"';
             }else{
@@ -598,7 +598,7 @@ class Database {
             }
         }
         $argument = " WHERE ";
-        for ($y=0; $y < count($where); $y++) { 
+        for ($y=0; $y < count($where); $y++) {
             if ($y == 0) {
                 $argument .= $keys2[$y]." = '".$where[$keys2[$y]]."' ";
             }else{
@@ -614,7 +614,7 @@ class Database {
         $conn = $this->getDepartment();
         $keys2 = array_keys($where);
         $argument = " WHERE ";
-        for ($y=0; $y < count($where); $y++) { 
+        for ($y=0; $y < count($where); $y++) {
             if ($y == 0) {
                 $argument .= $keys2[$y]." = '".$where[$keys2[$y]]."' ";
             }else{

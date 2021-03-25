@@ -17,7 +17,7 @@ class Tree extends CI_Controller {
 	{
         $this->Createtable->location('admin/tree/table_show');
         $this->Createtable->table_name('tableku');
-        $this->Createtable->create_row(["No","User","User Keluarga","Sebagai","Child", "action"]);
+        $this->Createtable->create_row(["No","User","User Keluarga","Sebagai","Kepala Keluarga", "action"]);
         $this->Createtable->order_set('0, 5');
 		$show = $this->Createtable->create();
 
@@ -30,15 +30,18 @@ class Tree extends CI_Controller {
 	public function table_show($action = 'show', $keyword = '')
 	{
 		if ($action == "show") {
-        
+
             if (isset($_POST['order'])): $setorder = $_POST['order']; else: $setorder = ''; endif;
 
             $this->Datatable_gugus->datatable(
                 [
                     "table" => $this->table1,
                     "select" => [
-						"*"
-					],
+											"*"
+										],
+										"where" => [
+												["user_id", '=', iduser()]
+										],
                     'limit' => [
                         'start' => post('start'),
                         'end' => post('length')
@@ -58,7 +61,40 @@ class Tree extends CI_Controller {
                         'order-data' => $setorder,
                         'order-option' => [ "1"=>"user_id", "2"=>"user_kel_id", "3"=>"mkel_id", "4"=>"child"],
                     ],
-                    
+                    "custome" => [
+											'user_id' => [
+							            'replacerow' => [
+							                'table' => 'user',
+							                'condition' => ['id'],
+							                'value' => ['user_id'],
+							                'get' => 'nama',
+							            ],
+							        ],
+											'user_kel_id' => [
+							            'replacerow' => [
+							                'table' => 'user_kel',
+							                'condition' => ['id'],
+							                'value' => ['user_kel_id'],
+							                'get' => 'nama',
+							            ],
+							        ],
+											'mkel_id' => [
+							            'replacerow' => [
+							                'table' => 'mkel',
+							                'condition' => ['id'],
+							                'value' => ['mkel_id'],
+							                'get' => 'keluarga',
+							            ],
+							        ],
+											'child' => [
+							            'replacerow' => [
+							                'table' => 'user_kel',
+							                'condition' => ['id'],
+							                'value' => ['child'],
+							                'get' => 'nama',
+							            ],
+							        ],
+										]
                 ]
             );
             $this->Datatable_gugus->table_show();
@@ -87,13 +123,13 @@ $user_kel_id = post("user_kel_id");
 $mkel_id = post("mkel_id");
 $child = post("child");
 
-        
+
 
         $simpan = $this->db->query("
-            INSERT INTO tree            
+            INSERT INTO tree
             (user_id,user_kel_id,mkel_id,child) VALUES ('$user_id','$user_kel_id','$mkel_id','$child')
         ");
-    
+
 
         if($simpan){
             redirect('admin/tree');
@@ -109,11 +145,11 @@ $child = post("child");
         $simpan = $this->db->query("
             UPDATE tree SET  user_id = '$user_id', user_kel_id = '$user_kel_id', mkel_id = '$mkel_id', child = '$child' WHERE id = '$key'
             ");
-    
+
 
         if($simpan){
             redirect('admin/tree');
         }
     }
-    
+
 }

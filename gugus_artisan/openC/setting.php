@@ -12,10 +12,10 @@ function tablecustome($table)
         }
     }
     if(isset($cc['custome'])){
-        $custome  = " 'custome' => ".$cc['custome'].',';  
+        $custome  = " 'custome' => ".$cc['custome'].',';
         return $custome;
     }else{
-        $custome  = "";  
+        $custome  = "";
         return $custome;
     }
 }
@@ -32,10 +32,10 @@ function newapi($table)
         }
     }
     if(isset($cc['newapi'])){
-        $custome = $cc['newapi']; 
+        $custome = $cc['newapi'];
         return $custome;
     }else{
-        $custome  = "";  
+        $custome  = "";
         return $custome;
     }
 }
@@ -50,7 +50,7 @@ function getrowname($table)
             $cc = $eld;
         }
     }
-    $name  = '["'.implode('","' , $cc['name']).'", "action"]'; 
+    $name  = '["'.implode('","' , $cc['name']).'", "action"]';
     return $name;
 }
 
@@ -69,7 +69,7 @@ function title($table, $title)
 
 function create_action($table = ""){
     require_once 'gugus_artisan/db_table.php';
-    
+
     $cc = null;
 
     $datar = crdb();
@@ -82,7 +82,7 @@ function create_action($table = ""){
 
     // form
     $form = $cc["form"];
-    
+
     $nm = $cc["data"];
     $thname = $cc["name"];
 
@@ -173,7 +173,7 @@ function create_action($table = ""){
     $html .= "
         \n
         \$simpan = \$this->db->query(".'"'."
-            INSERT INTO $table            
+            INSERT INTO $table
             $ex1 VALUES $ex2
         ".'"'.");
     ";
@@ -182,7 +182,7 @@ function create_action($table = ""){
 
 function update_action($table = "", $primary){
     require_once 'gugus_artisan/db_table.php';
-    
+
     $cc = null;
 
     $datar = crdb();
@@ -195,7 +195,7 @@ function update_action($table = "", $primary){
 
     // form
     $form = $cc["form"];
-    
+
     $nm = $cc["data"];
     $thname = $cc["name"];
 
@@ -278,7 +278,7 @@ function update_action($table = "", $primary){
 
 function create_form($table = ""){
     require_once 'gugus_artisan/db_table.php';
-    
+
     $cc = null;
 
     $datar = crdb();
@@ -291,7 +291,7 @@ function create_form($table = ""){
 
     // form
     $form = $cc["form"];
-    
+
     $nm = $cc["data"];
     $thname = $cc["name"];
 
@@ -303,7 +303,7 @@ function create_form($table = ""){
 
         }elseif($form[$key] == "text"){
             $html .= '
-                <?= 
+                <?=
                     form::input([
                         "title" => "'.$thname[$number].'",
                         "type" => "text",
@@ -314,7 +314,7 @@ function create_form($table = ""){
             ';
         }elseif($form[$key] == "editor"){
             $html .= '
-                <?= 
+                <?=
                     form::editor([
                         "title" => "'.$thname[$number].'",
                         "type" => "text",
@@ -326,7 +326,7 @@ function create_form($table = ""){
         }
         elseif($form[$key] == "file"){
             $html .= '
-                <?= 
+                <?=
                     form::input([
                         "title" => "'.$thname[$number].'",
                         "type" => "file",
@@ -338,7 +338,7 @@ function create_form($table = ""){
         }
         elseif($form[$key] == "hidden"){
             $html .= '
-                <?= 
+                <?=
                     form::input([
                         "title" => "'.$thname[$number].'",
                         "type" => "hidden",
@@ -350,7 +350,7 @@ function create_form($table = ""){
         }
         elseif($form[$key] == "number"){
             $html .= '
-                <?= 
+                <?=
                     form::input([
                         "title" => "'.$thname[$number].'",
                         "type" => "number",
@@ -362,7 +362,7 @@ function create_form($table = ""){
         }
         elseif($form[$key] == "email"){
             $html .= '
-                <?= 
+                <?=
                     form::input([
                         "title" => "'.$thname[$number].'",
                         "type" => "email",
@@ -374,7 +374,7 @@ function create_form($table = ""){
         }
         elseif($form[$key] == "username"){
             $html .= '
-                <?= 
+                <?=
                     form::input([
                         "title" => "'.$thname[$number].'",
                         "type" => "username",
@@ -386,7 +386,7 @@ function create_form($table = ""){
         }
         elseif($form[$key] == "date"){
             $html .= '
-                <?= 
+                <?=
                     form::input([
                         "title" => "'.$thname[$number].'",
                         "type" => "date",
@@ -398,7 +398,7 @@ function create_form($table = ""){
         }
         elseif($form[$key] == "password"){
             $html .= '
-                <?= 
+                <?=
                     form::input([
                         "title" => "'.$thname[$number].'",
                         "type" => "password",
@@ -410,7 +410,7 @@ function create_form($table = ""){
         }
         elseif($form[$key] == "login"){
             $html .= '
-                <?= 
+                <?=
                     form::input([
                         "title" => "'.$thname[$number].'",
                         "type" => "hidden",
@@ -424,7 +424,7 @@ function create_form($table = ""){
         elseif(is_array($form[$key])){
             if ($form[$key]["type"] == "select") {
                 $html .= '
-                <?= 
+                <?=
                     form::select_db([
                         "title" => "'.$thname[$number].'",
                         "type" => "password",
@@ -443,7 +443,7 @@ function create_form($table = ""){
         elseif(is_array($form[$key])){
             if ($form[$key]["type"] == "multiple") {
                 $html .= '
-                <?= 
+                <?=
                     form::multiple([
                         "title" => "'.$thname[$number].'",
                         "type" => "password",
@@ -464,7 +464,7 @@ function create_form($table = ""){
 
 function create_form_edit($table = ""){
     require_once 'gugus_artisan/db_table.php';
-    
+
     $cc = null;
 
     $datar = crdb();
@@ -477,14 +477,14 @@ function create_form_edit($table = ""){
 
     // form
     $form = $cc["form"];
-    
+
     $nm = $cc["data"];
 
     $html = "";
 
 
     $html .= '
-        <?= 
+        <?=
             form::input([
                 "type" => "hidden",
                 "fc" => "id",
@@ -501,7 +501,7 @@ function create_form_edit($table = ""){
 
         }elseif($form[$key] == "text"){
             $html .= '
-                <?= 
+                <?=
                     form::input([
                         "title" => "'.$thname[$number].'",
                         "type" => "text",
@@ -513,7 +513,7 @@ function create_form_edit($table = ""){
             ';
         }elseif($form[$key] == "editor"){
             $html .= '
-                <?= 
+                <?=
                     form::editor([
                         "title" => "'.$thname[$number].'",
                         "type" => "text",
@@ -526,7 +526,7 @@ function create_form_edit($table = ""){
         }
         elseif($form[$key] == "file"){
             $html .= '
-                <?= 
+                <?=
                     form::input([
                         "title" => "'.$thname[$number].'",
                         "type" => "file",
@@ -539,7 +539,7 @@ function create_form_edit($table = ""){
         }
         elseif($form[$key] == "hidden"){
             $html .= '
-                <?= 
+                <?=
                     form::input([
                         "title" => "'.$thname[$number].'",
                         "type" => "hidden",
@@ -552,7 +552,7 @@ function create_form_edit($table = ""){
         }
         elseif($form[$key] == "number"){
             $html .= '
-                <?= 
+                <?=
                     form::input([
                         "title" => "'.$thname[$number].'",
                         "type" => "number",
@@ -563,9 +563,22 @@ function create_form_edit($table = ""){
                 ?>
             ';
         }
+        elseif($form[$key] == "date"){
+            $html .= '
+                <?=
+                    form::input([
+                        "title" => "'.$thname[$number].'",
+                        "type" => "date",
+                        "fc" => "'.$key.'",
+                        "placeholder" => "tambahkan '.$key.'",
+                        "value" => $form_data->'.$key.',
+                    ])
+                ?>
+            ';
+        }
         elseif($form[$key] == "email"){
             $html .= '
-                <?= 
+                <?=
                     form::input([
                         "title" => "'.$thname[$number].'",
                         "type" => "email",
@@ -578,7 +591,7 @@ function create_form_edit($table = ""){
         }
         elseif($form[$key] == "username"){
             $html .= '
-                <?= 
+                <?=
                     form::input([
                         "title" => "'.$thname[$number].'",
                         "type" => "username",
@@ -590,7 +603,7 @@ function create_form_edit($table = ""){
         }
         elseif($form[$key] == "password"){
             $html .= '
-                <?= 
+                <?=
                     form::input([
                         "title" => "'.$thname[$number].'",
                         "type" => "password",
@@ -603,13 +616,13 @@ function create_form_edit($table = ""){
         }
         elseif($form[$key] == "login"){
             $html .= '
-                <?= 
+                <?=
                     form::input([
                         "title" => "'.$thname[$number].'",
                         "type" => "hidden",
                         "fc" => "'.$key.'",
                         "placeholder" => "tambahkan '.$key.'",
-                        "value" => generate_session("datalogin")["id"],
+                        "value" => iduser(),
                     ])
                 ?>
             ';
@@ -617,7 +630,7 @@ function create_form_edit($table = ""){
         elseif(is_array($form[$key])){
             if ($form[$key]["type"] == "select") {
                 $html .= '
-                <?= 
+                <?=
                     form::select_db([
                         "title" => "'.$thname[$number].'",
                         "type" => "password",
@@ -631,7 +644,7 @@ function create_form_edit($table = ""){
                 ?>
             ';
             }elseif($form[$key]["type"] == "slug"){
-                    
+
             }
         }
         $number++;

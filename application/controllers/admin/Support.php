@@ -88,7 +88,7 @@ $nama = post("nama");
         
 
         $simpan = $this->db->query("
-            INSERT INTO support            
+            INSERT INTO support
             (foto,nama) VALUES ('$foto','$nama')
         ");
     
