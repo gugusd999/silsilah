@@ -30,7 +30,7 @@ class Tbl_kegiatan extends CI_Controller {
 	public function table_show($action = 'show', $keyword = '')
 	{
 		if ($action == "show") {
-        
+
             if (isset($_POST['order'])): $setorder = $_POST['order']; else: $setorder = ''; endif;
 
             $this->Datatable_gugus->datatable(
@@ -58,7 +58,7 @@ class Tbl_kegiatan extends CI_Controller {
                         'order-data' => $setorder,
                         'order-option' => [ "1"=>"user_id", "2"=>"user_kel_id", "3"=>"kegiatan_id", "4"=>"judul", "5"=>"foto", "6"=>"isi", "7"=>"waktu", "8"=>"status_id"],
                     ],
-                    
+
                 ]
             );
             $this->Datatable_gugus->table_show();
@@ -83,21 +83,18 @@ class Tbl_kegiatan extends CI_Controller {
 
     public function simpan(){
         $user_id = post("user_id");
-$user_kel_id = post("user_kel_id");
-$kegiatan_id = post("kegiatan_id");
-$judul = post("judul");
-$foto = post("foto");
-$isi = post("isi");
-$waktu = post("waktu");
-$status_id = post("status_id");
-
-        
-
+				$user_kel_id = post("user_kel_id");
+				$kegiatan_id = post("kegiatan_id");
+				$judul = post("judul");
+				$foto = Form::getfile("foto", "assets/gambar/$this->table1/");
+				$isi = post("isi");
+				$waktu = post("waktu");
+				$status_id = post("status_id");
         $simpan = $this->db->query("
-            INSERT INTO tbl_kegiatan            
+            INSERT INTO tbl_kegiatan
             (user_id,user_kel_id,kegiatan_id,judul,foto,isi,waktu,status_id) VALUES ('$user_id','$user_kel_id','$kegiatan_id','$judul','$foto','$isi','$waktu','$status_id')
         ");
-    
+
 
         if($simpan){
             redirect('admin/tbl_kegiatan');
@@ -109,7 +106,7 @@ $status_id = post("status_id");
 $user_kel_id = post("user_kel_id");
 $kegiatan_id = post("kegiatan_id");
 $judul = post("judul");
-$foto = post("foto");
+$foto = Form::getfile("foto", "assets/gambar/$this->table1/", $key, $this->table1);
 $isi = post("isi");
 $waktu = post("waktu");
 $status_id = post("status_id");
@@ -117,11 +114,11 @@ $status_id = post("status_id");
         $simpan = $this->db->query("
             UPDATE tbl_kegiatan SET  user_id = '$user_id', user_kel_id = '$user_kel_id', kegiatan_id = '$kegiatan_id', judul = '$judul', foto = '$foto', isi = '$isi', waktu = '$waktu', status_id = '$status_id' WHERE id = '$key'
             ");
-    
+
 
         if($simpan){
             redirect('admin/tbl_kegiatan');
         }
     }
-    
+
 }

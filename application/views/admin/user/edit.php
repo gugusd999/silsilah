@@ -19,25 +19,26 @@
         <div class="form-element-list">
 
           <form action="<?= site_url('admin/user/update') ?>" method="post" enctype="multipart/form-data">
-              
-        <?= 
+
+        <?=
             form::input([
                 "type" => "hidden",
                 "fc" => "id",
                 "value" => $form_data->id,
             ])
         ?>
-    
-                <?= 
+
+                <?=
                     form::input([
                         "title" => "username",
                         "type" => "username",
                         "fc" => "username",
                         "placeholder" => "tambahkan username",
+                        "value" => $form_data->username,
                     ])
                 ?>
-            
-                <?= 
+
+                <?=
                     form::input([
                         "title" => "password",
                         "type" => "password",
@@ -46,8 +47,8 @@
                         "value" => $form_data->password,
                     ])
                 ?>
-            
-                <?= 
+
+                <?=
                     form::input([
                         "title" => "nama",
                         "type" => "text",
@@ -56,8 +57,8 @@
                         "value" => $form_data->nama,
                     ])
                 ?>
-            
-                <?= 
+
+                <?=
                     form::input([
                         "title" => "hp",
                         "type" => "text",
@@ -66,8 +67,8 @@
                         "value" => $form_data->hp,
                     ])
                 ?>
-            
-                <?= 
+
+                <?=
                     form::input([
                         "title" => "namaayah",
                         "type" => "text",
@@ -76,8 +77,8 @@
                         "value" => $form_data->namaayah,
                     ])
                 ?>
-            
-                <?= 
+
+                <?=
                     form::input([
                         "title" => "namaibu",
                         "type" => "text",
@@ -86,8 +87,8 @@
                         "value" => $form_data->namaibu,
                     ])
                 ?>
-            
-                <?= 
+
+                <?=
                     form::input([
                         "title" => "email",
                         "type" => "email",
@@ -96,17 +97,30 @@
                         "value" => $form_data->email,
                     ])
                 ?>
-            
-                <?= 
-                    form::input([
+
+                <?=
+                    form::select_db([
                         "title" => "status",
                         "type" => "text",
                         "fc" => "status_id",
                         "placeholder" => "tambahkan status_id",
-                        "value" => $form_data->status_id,
+                        "db" => "mstatus",
+                        "data" => "id",
+                        "name" => "status",
+                        "selected" => $form_data->status_id,
                     ])
                 ?>
-            
+
+                <?=
+                    form::input([
+                        "title" => "foto",
+                        "type" => "file",
+                        "fc" => "foto",
+                        "placeholder" => "tambahkan status_id",
+                        "value" => $form_data->foto,
+                    ])
+                ?>
+
               <div class="form-group">
                 <button type="submit" class="btn btn-primary">Simpan</button>
                 <a class="btn btn-default" href="<?= site_url('admin/user'); ?>">Back</a>

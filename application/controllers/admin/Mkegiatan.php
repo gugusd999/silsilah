@@ -17,8 +17,8 @@ class Mkegiatan extends CI_Controller {
 	{
         $this->Createtable->location('admin/mkegiatan/table_show');
         $this->Createtable->table_name('tableku');
-        $this->Createtable->create_row(["no","kegiatan", "action"]);
-        $this->Createtable->order_set('0, 2');
+        $this->Createtable->create_row(["no","user","kegiatan", "action"]);
+        $this->Createtable->order_set('0, 3');
 		$show = $this->Createtable->create();
 
 		$data['datatable'] = $show;
@@ -30,7 +30,7 @@ class Mkegiatan extends CI_Controller {
 	public function table_show($action = 'show', $keyword = '')
 	{
 		if ($action == "show") {
-        
+
             if (isset($_POST['order'])): $setorder = $_POST['order']; else: $setorder = ''; endif;
 
             $this->Datatable_gugus->datatable(
@@ -45,20 +45,30 @@ class Mkegiatan extends CI_Controller {
                     ],
                     'search' => [
                         'value' => $this->Datatable_gugus->search(),
-                        'row' => ["kegiatan"]
+                        'row' => ["user","kegiatan"]
                     ],
                     'table-draw' => post('draw'),
                     'table-show' => [
                         'key' => 'id',
-                        'data' => ["kegiatan"]
+                        'data' => ["user","kegiatan"]
                     ],
                     "action" => "standart",
                     'order' => [
                         'order-default' => ['id', 'ASC'],
                         'order-data' => $setorder,
-                        'order-option' => [ "1"=>"kegiatan"],
+                        'order-option' => [ "1"=>"user", "2"=>"kegiatan"],
                     ],
-                    
+										"custome" => [
+											'user' => [
+												 'replacerow' => [
+														 'table' => 'user',
+														 'condition' => ['id'],
+														 'value' => ['user'],
+														 'get' => 'nama',
+												 ],
+										 ],
+										]
+
                 ]
             );
             $this->Datatable_gugus->table_show();
@@ -82,15 +92,16 @@ class Mkegiatan extends CI_Controller {
 
 
     public function simpan(){
-        $kegiatan = post("kegiatan");
+        $user = post("user");
+$kegiatan = post("kegiatan");
 
-        
+
 
         $simpan = $this->db->query("
-            INSERT INTO mkegiatan            
-            (kegiatan) VALUES ('$kegiatan')
+            INSERT INTO mkegiatan
+            (user,kegiatan) VALUES ('$user','$kegiatan')
         ");
-    
+
 
         if($simpan){
             redirect('admin/mkegiatan');
@@ -98,16 +109,17 @@ class Mkegiatan extends CI_Controller {
     }
 
     public function update(){
-          $key = post('id'); $kegiatan = post("kegiatan");
+          $key = post('id'); $user = post("user");
+$kegiatan = post("kegiatan");
 
         $simpan = $this->db->query("
-            UPDATE mkegiatan SET  kegiatan = '$kegiatan' WHERE id = '$key'
+            UPDATE mkegiatan SET  user = '$user', kegiatan = '$kegiatan' WHERE id = '$key'
             ");
-    
+
 
         if($simpan){
             redirect('admin/mkegiatan');
         }
     }
-    
+
 }

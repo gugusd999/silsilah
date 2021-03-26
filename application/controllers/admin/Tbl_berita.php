@@ -30,7 +30,7 @@ class Tbl_berita extends CI_Controller {
 	public function table_show($action = 'show', $keyword = '')
 	{
 		if ($action == "show") {
-        
+
             if (isset($_POST['order'])): $setorder = $_POST['order']; else: $setorder = ''; endif;
 
             $this->Datatable_gugus->datatable(
@@ -107,13 +107,13 @@ $foto = Form::getfile("foto", "assets/gambar/$this->table1/");
 $isi = post("isi");
 $status_id = post("status_id");
 
-        
+
 
         $simpan = $this->db->query("
-            INSERT INTO tbl_berita            
+            INSERT INTO tbl_berita
             (user_id,user_kel_id,berita_id,judul,foto,isi,status_id) VALUES ('$user_id','$user_kel_id','$berita_id','$judul','$foto','$isi','$status_id')
         ");
-    
+
 
         if($simpan){
             redirect('admin/tbl_berita');
@@ -132,11 +132,11 @@ $status_id = post("status_id");
         $simpan = $this->db->query("
             UPDATE tbl_berita SET  user_id = '$user_id', user_kel_id = '$user_kel_id', berita_id = '$berita_id', judul = '$judul', foto = '$foto', isi = '$isi', status_id = '$status_id' WHERE id = '$key'
             ");
-    
+
 
         if($simpan){
             redirect('admin/tbl_berita');
         }
     }
-    
+
 }

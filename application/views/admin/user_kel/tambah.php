@@ -17,19 +17,20 @@
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="form-element-list">
-          
+
           <form action="<?= site_url('admin/user_kel/simpan') ?>" method="post" enctype="multipart/form-data">
-              
-                <?= 
+
+                <?=
                     form::input([
                         "title" => "user",
-                        "type" => "text",
+                        "type" => "hidden",
                         "fc" => "user_id",
                         "placeholder" => "tambahkan user_id",
+                        "value" => iduser(),
                     ])
                 ?>
-            
-                <?= 
+
+                <?=
                     form::input([
                         "title" => "nama",
                         "type" => "text",
@@ -37,17 +38,20 @@
                         "placeholder" => "tambahkan nama",
                     ])
                 ?>
-            
-                <?= 
-                    form::input([
+
+                <?=
+                    form::select_db([
                         "title" => "jenis kelamin",
-                        "type" => "text",
+                        "type" => "password",
                         "fc" => "kelamin_id",
                         "placeholder" => "tambahkan kelamin_id",
+                        "db" => "mkelamin",
+                        "data" => "id",
+                        "name" => "kelamin",
                     ])
                 ?>
-            
-                <?= 
+
+                <?=
                     form::input([
                         "title" => "tempat lahir",
                         "type" => "text",
@@ -55,44 +59,53 @@
                         "placeholder" => "tambahkan tmptlahir",
                     ])
                 ?>
-            
-                <?= 
+
+                <?=
                     form::input([
                         "title" => "tanggal lahir",
-                        "type" => "text",
+                        "type" => "date",
                         "fc" => "tgllahir",
                         "placeholder" => "tambahkan tgllahir",
                     ])
                 ?>
-            
-                <?= 
-                    form::input([
+
+                <?=
+                    form::select_db([
                         "title" => "agama",
-                        "type" => "text",
+                        "type" => "password",
                         "fc" => "agama_id",
                         "placeholder" => "tambahkan agama_id",
+                        "db" => "magama",
+                        "data" => "id",
+                        "name" => "agama",
                     ])
                 ?>
-            
-                <?= 
-                    form::input([
+
+                <?=
+                    form::select_db([
                         "title" => "pendidikan",
-                        "type" => "text",
+                        "type" => "password",
                         "fc" => "pendidikan_id",
                         "placeholder" => "tambahkan pendidikan_id",
+                        "db" => "mpendidikan",
+                        "data" => "id",
+                        "name" => "pendidikan",
                     ])
                 ?>
-            
-                <?= 
-                    form::input([
+
+                <?=
+                    form::select_db([
                         "title" => "pekerjaan",
-                        "type" => "text",
+                        "type" => "password",
                         "fc" => "pekerjaan_id",
                         "placeholder" => "tambahkan pekerjaan_id",
+                        "db" => "mpekerjaan",
+                        "data" => "id",
+                        "name" => "pekerjaan",
                     ])
                 ?>
-            
-                <?= 
+
+                <?=
                     form::input([
                         "title" => "alamat",
                         "type" => "text",
@@ -100,71 +113,79 @@
                         "placeholder" => "tambahkan alamat",
                     ])
                 ?>
-            
-                <?= 
-                    form::input([
-                        "title" => "kelurahan",
-                        "type" => "text",
-                        "fc" => "kel",
-                        "placeholder" => "tambahkan kel",
+
+                <?=
+                    form::select_db([
+                        "title" => "provinsi",
+                        "type" => "password",
+                        "fc" => "prov_id",
+                        "placeholder" => "tambahkan prov_id",
+                        "db" => "mprovinsi",
+                        "data" => "id",
+                        "name" => "name",
                     ])
                 ?>
-            
-                <?= 
-                    form::input([
-                        "title" => "kecamatan",
-                        "type" => "text",
-                        "fc" => "kec",
-                        "placeholder" => "tambahkan kec",
-                    ])
-                ?>
-            
-                <?= 
-                    form::input([
+
+                <?=
+                    form::select([
                         "title" => "kabupaten",
-                        "type" => "text",
+                        "type" => "password",
                         "fc" => "kab_id",
                         "placeholder" => "tambahkan kab_id",
                     ])
                 ?>
-            
-                <?= 
-                    form::input([
-                        "title" => "provinsi",
-                        "type" => "text",
-                        "fc" => "prov_id",
-                        "placeholder" => "tambahkan prov_id",
+
+
+
+                <?=
+                    form::select([
+                        "title" => "kecamatan",
+                        "type" => "password",
+                        "fc" => "kec",
+                        "placeholder" => "tambahkan kec",
                     ])
                 ?>
-            
-                <?= 
-                    form::input([
+
+                <?=
+                    form::select([
+                        "title" => "kelurahan",
+                        "type" => "password",
+                        "fc" => "kel",
+                        "placeholder" => "tambahkan kel",
+                    ])
+                ?>
+
+                <?=
+                    form::select_db([
                         "title" => "perkawinan",
-                        "type" => "text",
+                        "type" => "password",
                         "fc" => "perkawinan_id",
                         "placeholder" => "tambahkan perkawinan_id",
+                        "db" => "mstatkel",
+                        "data" => "id",
+                        "name" => "statkel",
                     ])
                 ?>
-            
-                <?= 
+
+                <?=
                     form::input([
                         "title" => "tanggal menikah",
-                        "type" => "text",
+                        "type" => "date",
                         "fc" => "tglmenikah",
                         "placeholder" => "tambahkan tglmenikah",
                     ])
                 ?>
-            
-                <?= 
+
+                <?=
                     form::input([
                         "title" => "tanggal meninggal",
-                        "type" => "text",
+                        "type" => "date",
                         "fc" => "tglmeninggal",
                         "placeholder" => "tambahkan tglmeninggal",
                     ])
                 ?>
-            
-                <?= 
+
+                <?=
                     form::input([
                         "title" => "tempat meninggal",
                         "type" => "text",
@@ -172,52 +193,149 @@
                         "placeholder" => "tambahkan tmptmeninggal",
                     ])
                 ?>
-            
-                <?= 
+
+                <?=
                     form::input([
                         "title" => "foto",
-                        "type" => "text",
+                        "type" => "file",
                         "fc" => "foto",
                         "placeholder" => "tambahkan foto",
                     ])
                 ?>
-            
-                <?= 
+
+                <?=
                     form::input([
                         "title" => "username",
-                        "type" => "text",
+                        "type" => "username",
                         "fc" => "username",
                         "placeholder" => "tambahkan username",
                     ])
                 ?>
-            
-                <?= 
+
+                <?=
                     form::input([
                         "title" => "password",
-                        "type" => "text",
+                        "type" => "password",
                         "fc" => "password",
                         "placeholder" => "tambahkan password",
                     ])
                 ?>
-            
-                <?= 
+
+                <?=
                     form::input([
                         "title" => "waktu",
-                        "type" => "text",
+                        "type" => "date",
                         "fc" => "waktu",
                         "placeholder" => "tambahkan waktu",
                     ])
                 ?>
-            
-                <?= 
-                    form::input([
+
+                <?=
+                    form::select_db([
                         "title" => "status",
-                        "type" => "text",
+                        "type" => "password",
                         "fc" => "status_id",
                         "placeholder" => "tambahkan status_id",
+                        "db" => "mstatus",
+                        "data" => "id",
+                        "name" => "status",
                     ])
                 ?>
-            
+
+                <?=
+                    form::select_db([
+                        "title" => "sebagai",
+                        "type" => "password",
+                        "fc" => "sebagai",
+                        "placeholder" => "tambahkan sebagai",
+                        "db" => "mkel",
+                        "data" => "id",
+                        "name" => "keluarga",
+                    ])
+                ?>
+
+                <?=
+                    form::select_db([
+                        "title" => "kepala keluarga",
+                        "type" => "password",
+                        "fc" => "id_kel",
+                        "placeholder" => "tambahkan id_kel",
+                        "db" => "user_kel",
+                        "data" => "id",
+                        "name" => "nama",
+                    ])
+                ?>
+
+
+
+                                                <script type="text/javascript">
+                                                  $(document).on('change', '#prov_id', function(){
+                                                    var val = $(this).val();
+
+                                                    $.ajax({
+                                                      url: '<?= site_url('admin/user_kel/getkab/') ?>'+val,
+                                                      success: function(response){
+                                                        var opsi = JSON.parse(response);
+                                                        opsi = opsi.map(function(el){
+                                                          return `<option value='${el.id}'>${el.name}</option>`
+                                                        }).join('');
+
+                                                        opsi = '<option val="">Pilih Kabupaten</option>'+opsi;
+
+                                                        document.getElementById('kab_id').innerHTML = opsi;
+
+                                                      }
+                                                    })
+
+
+                                                  })
+                                                </script>
+
+
+                                                <script type="text/javascript">
+                                                  $(document).on('change', '#kab_id', function(){
+                                                    var val = $(this).val();
+
+                                                    $.ajax({
+                                                      url: '<?= site_url('admin/user_kel/getkec/') ?>'+val,
+                                                      success: function(response){
+                                                        var opsi = JSON.parse(response);
+                                                        opsi = opsi.map(function(el){
+                                                          return `<option value='${el.id}'>${el.name}</option>`
+                                                        }).join('');
+
+                                                        opsi = '<option val="">Pilih Kecamatan</option>'+opsi;
+
+                                                        document.getElementById('kec').innerHTML = opsi;
+
+                                                      }
+                                                    })
+
+
+                                                  })
+                                                </script>
+
+
+                                <script type="text/javascript">
+                                  $(document).on('change', '#kec', function(){
+                                    var val = $(this).val();
+                                    $.ajax({
+                                      url: '<?= site_url('admin/user_kel/getdes/') ?>'+val,
+                                      success: function(response){
+                                        var opsi = JSON.parse(response);
+                                        opsi = opsi.map(function(el){
+                                          return `<option value='${el.id}'>${el.name}</option>`
+                                        }).join('');
+                                        opsi = '<option val="">Pilih Desa</option>'+opsi;
+                                        document.getElementById('kel').innerHTML = opsi;
+                                      }
+                                    })
+
+                                  })
+                                </script>
+
+
+
               <div class="form-group">
                 <button type="submit" class="btn btn-primary">Simpan</button>
                 <a class="btn btn-default" href="<?= site_url('admin/user_kel'); ?>">Back</a>

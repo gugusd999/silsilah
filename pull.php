@@ -1,4 +1,4 @@
 <?php
 
     echo "echo";
-    shell_exec("php run");
+    shell_exec("php gugus database");

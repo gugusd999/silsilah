@@ -1001,6 +1001,7 @@ $arr[] = [
       'status_id' => char(10),
       'created_at' => timestamp(),
       'updated_at' => timestampupdate(),
+      'foto' => char(255),
   ],
   'form' => [
       'id' => 'no',

@@ -17,8 +17,8 @@ class Mberita extends CI_Controller {
 	{
         $this->Createtable->location('admin/mberita/table_show');
         $this->Createtable->table_name('tableku');
-        $this->Createtable->create_row(["no","berita","status", "action"]);
-        $this->Createtable->order_set('0, 3');
+        $this->Createtable->create_row(["no","user","berita","status", "action"]);
+        $this->Createtable->order_set('0, 4');
 		$show = $this->Createtable->create();
 
 		$data['datatable'] = $show;
@@ -30,7 +30,7 @@ class Mberita extends CI_Controller {
 	public function table_show($action = 'show', $keyword = '')
 	{
 		if ($action == "show") {
-        
+
             if (isset($_POST['order'])): $setorder = $_POST['order']; else: $setorder = ''; endif;
 
             $this->Datatable_gugus->datatable(
@@ -45,20 +45,28 @@ class Mberita extends CI_Controller {
                     ],
                     'search' => [
                         'value' => $this->Datatable_gugus->search(),
-                        'row' => ["berita","status_id"]
+                        'row' => ["user","berita","status_id"]
                     ],
                     'table-draw' => post('draw'),
                     'table-show' => [
                         'key' => 'id',
-                        'data' => ["berita","status_id"]
+                        'data' => ["user","berita","status_id"]
                     ],
                     "action" => "standart",
                     'order' => [
                         'order-default' => ['id', 'ASC'],
                         'order-data' => $setorder,
-                        'order-option' => [ "1"=>"berita", "2"=>"status_id"],
+                        'order-option' => [ "1"=>"user", "2"=>"berita", "3"=>"status_id"],
                     ],
                      'custome' => [
+											 'user' => [
+ 							            'replacerow' => [
+ 							                'table' => 'user',
+ 							                'condition' => ['id'],
+ 							                'value' => ['user'],
+ 							                'get' => 'nama',
+ 							            ],
+ 							        ],
         'status_id' => [
             'key' => ['status_id', 'id'],
             'content' => "
@@ -109,15 +117,16 @@ class Mberita extends CI_Controller {
 
 
     public function simpan(){
-        $berita = post("berita");
+        $user = post("user");
+$berita = post("berita");
 
-        
+
 
         $simpan = $this->db->query("
-            INSERT INTO mberita            
-            (berita) VALUES ('$berita')
+            INSERT INTO mberita
+            (user,berita) VALUES ('$user','$berita')
         ");
-    
+
 
         if($simpan){
             redirect('admin/mberita');
@@ -125,16 +134,17 @@ class Mberita extends CI_Controller {
     }
 
     public function update(){
-          $key = post('id'); $berita = post("berita");
+          $key = post('id'); $user = post("user");
+$berita = post("berita");
 
         $simpan = $this->db->query("
-            UPDATE mberita SET  berita = '$berita' WHERE id = '$key'
+            UPDATE mberita SET  user = '$user', berita = '$berita' WHERE id = '$key'
             ");
-    
+
 
         if($simpan){
             redirect('admin/mberita');
         }
     }
-    
+
 }

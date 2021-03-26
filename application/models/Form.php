@@ -17,30 +17,30 @@ class Form extends CI_Model
       }
       return $this->db->update($table, $data);
     }
-  
+
     public function qrsave($table, $data)
     {
       return $this->db->insert($table, $data);
     }
-  
+
     public static function save($a, $b = []){
       return (new self)->qrsave($a, $b);
     }
-  
+
     public static function update($a, $b = [], $c=[]){
       return (new self)->updateqr($a, $b, $c);
     }
-  
+
     public static function select_db_material($data = "")
       {
-  
+
           $dataNama = $data['data'];
           $name = $data['name'];
-  
+
           $getData = (new self)->mydbr("SELECT DISTINCT(".$name.") as ".$name.", ".$dataNama." FROM ".$data['db']);
-  
+
           $createOption = '<option selected value="">--pilih data--</option>';
-          
+
           foreach ($getData as $key => $value) {
               if (isset($data['selected'])) {
                   if ($data['selected'] == $value->$dataNama) {
@@ -52,14 +52,14 @@ class Form extends CI_Model
                   $createOption .= '<option value="'.$value->$dataNama.'">'.$value->$name.'</option>';
               }
           }
-  
+
           $html = "
           <div class='input-field col s12'>
               <select id='".$data['fc']."' name='".$data['fc']."'>
               $createOption
               </select>
               <label for='".$data['fc']."'>".$data['title']."</label>
-          </div> 
+          </div>
           <script>
               $(document).ready(function(){
                   $('select').formSelect();
@@ -69,17 +69,39 @@ class Form extends CI_Model
           ";
           return $html;
       }
-  
+
     public static function select_db($data = "")
       {
-  
+
           $dataNama = $data['data'];
           $name = $data['name'];
-  
-          $getData = (new self)->mydbr("SELECT DISTINCT(".$name.") as ".$name.", ".$dataNama." FROM ".$data['db']);
-  
+
+
+          $ccs = "";
+
+          if (isset($data['condition'])) {
+
+            $ccs = " WHERE ";
+
+            $condition = $data['condition'];
+
+            $keyss = array_keys($condition);
+
+            foreach ($keyss as $key => $value) {
+              if ($key == 0) {
+                $val = $condition[$value];
+                $ccs .= " $value = '$val' ";
+              }else{
+                $val = $condition[$value];
+                $ccs .= ", $value = '$val' ";
+              }
+            }
+          }
+
+          $getData = (new self)->mydbr("SELECT DISTINCT(".$name.") as ".$name.", ".$dataNama." FROM ".$data['db'].$ccs);
+
           $createOption = '<option selected value="">--pilih data--</option>';
-          
+
           foreach ($getData as $key => $value) {
               if (isset($data['selected'])) {
                   if ($data['selected'] == $value->$dataNama) {
@@ -91,28 +113,28 @@ class Form extends CI_Model
                   $createOption .= '<option value="'.$value->$dataNama.'">'.$value->$name.'</option>';
               }
           }
-  
+
           $html = "
           <div class='form-group'>
               <label for='".$data['fc']."'>".$data['title']."</label>
               <select id='".$data['fc']."' name='".$data['fc']."' class='form-control'>
                   $createOption
               </select>
-          </div> 
+          </div>
           ";
           return $html;
       }
-      
+
     public static function multiple($data = "")
       {
-  
+
           $dataNama = $data['data'];
           $name = $data['name'];
-  
+
           $getData = (new self)->mydbr("SELECT DISTINCT(".$name.") as ".$name.", ".$dataNama." FROM ".$data['db']);
-  
+
           $createOption = '<option value="">--pilih data--</option>';
-          
+
           foreach ($getData as $key => $value) {
               if (isset($data['selected'])) {
                   if ($data['selected'] == $value->$dataNama) {
@@ -124,7 +146,7 @@ class Form extends CI_Model
                   $createOption .= '<option value="'.$value->$dataNama.'">'.$value->$name.'</option>';
               }
           }
-  
+
           $html = "
           <div class='form-group'>
               <label for='".$data['fc']."'>".$data['title']."</label>
@@ -140,7 +162,7 @@ class Form extends CI_Model
           ";
           return $html;
       }
-  
+
       public static function getfile($data, $path, $id = "", $table = "")
       {
           if (!file_exists($path)) {
@@ -176,11 +198,11 @@ class Form extends CI_Model
               return $gambar->$nameparamp;
           }
       }
-  
+
       public static function read_db($a = ""){
           return (new self)->mydbr($a);
       }
-  
+
       public static function cekdata($data, $nilai)
       {
           if (isset($data[$nilai])) {
@@ -193,7 +215,7 @@ class Form extends CI_Model
 
 
 
-  
+
       public static function input($data)
       {
           $html = '<div class="row">';
@@ -211,7 +233,7 @@ class Form extends CI_Model
                   $html .= '	</div>';
               }
           }
-          
+
           if (self::cekdata($data, 'type') != "hidden") {
             $html .= '	<label for="'.self::cekdata($data, 'fc').'" >'.self::cekdata($data,'title').'</label>';
           }
@@ -224,11 +246,11 @@ class Form extends CI_Model
           if (isset($data['placeholder'])) {
               $html .= ' placeholder="'.$data['placeholder'].'" ';
           }
-          
+
           if (isset($data['video']) && $data['video'] === true) {
               $html .= ' data-video="'.self::cekdata($data, 'fc').'" ';
           }
-  
+
           if (isset($data['value'])) {
               $html .= ' value="'.$data['value'].'" ';
           }
@@ -242,39 +264,39 @@ class Form extends CI_Model
                   $html .= ' required ';
               }
           }
-  
+
           if (isset($data['multiple'])) {
               if ($data['multiple'] === true) {
                   $html .= " multiple ";
               }
           }
-  
+
           if(isset($data['accept'])){
               if ($data['accept'] === "images") {
                   $html .= "accept='image/*'";
               }
           }
-  
+
           if(isset($data['tags'])){
               if ($data['tags'] === true) {
                   $html .= " data-role='tagsinput' ";
               }
           }
-  
+
           if(isset($data['attr'])){
               $cm = $data['attr'];
               $html .= " $cm ";
           }
-  
+
           if(isset($data['num-only'])){
               if ($data['num-only'] === true) {
                   $html .= " onkeypress='numonly(event)' ";
               }
           }
           $html .= '>';
-  
-          
-          
+
+
+
           if(isset($data['info'])){
               $html .= '<p style="color: #aaa; font-size: 12px;">';
               $html .= '<i>';
@@ -282,16 +304,16 @@ class Form extends CI_Model
               $html .= '</i>';
               $html .= '</p>';
           }
-              
-  
+
+
           if(isset($data['num-only'])){
               if ($data['num-only'] === true) {
                   $html .= '
                   <script>
-  
+
                       function numonly(evt) {
                           var theEvent = evt || window.event;
-                      
+
                           // Handle paste
                           if (theEvent.type === "paste") {
                               key = event.clipboardData.getData("text/plain");
@@ -306,13 +328,13 @@ class Form extends CI_Model
                           if(theEvent.preventDefault) theEvent.preventDefault();
                           }
                       }
-  
+
                       </script>
-  
+
                   ';
               }
           }
-  
+
           if (isset($data["show-image"])) {
               if ($data["show-image"] === true) {
                   $html .= '
@@ -320,19 +342,19 @@ class Form extends CI_Model
                       function bacagambarnya(input){
                           if (input.files && input.files[0]) {
                               var reader = new FileReader();
-  
+
                               reader.onload = function (e){
                                   $("#gambar-'.self::cekdata($data, 'fc').'").attr("src", e.target.result);
                               }
                               reader.readAsDataURL(input.files[0]);
                           }
                       }
-  
+
                       $("#'.self::cekdata($data, 'fc').'").change(function(){
                           bacagambarnya(this);
                       })
                   </script>
-  
+
               ';
               }
           }
@@ -377,13 +399,13 @@ class Form extends CI_Model
                   $html .= ' required ';
               }
           }
-  
+
           if (isset($data['multiple'])) {
               if ($data['multiple'] === true) {
                   $html .= " multiple ";
               }
           }
-  
+
           if(isset($data['accept'])){
               if ($data['accept'] === "images") {
                   $html .= "accept='image/*'";
@@ -398,23 +420,23 @@ class Form extends CI_Model
           $html .= '$("#'.self::cekdata($data, 'fc').'").summernote()';
           $html .= '</script>';
           $html .= '</div>';
-  
+
           return $html;
       }
-  
-  
+
+
       public static function switch($name = "",$data1 = "", $data2= "", $selected = 'checked')
       {
-  
-          
+
+
           $dataValue = ['checked', ''];
           $arr = [$data1, $data2];
-  
+
           $html = '';
-  
+
           foreach ($arr as $key => $value) {
               if ($dataValue[$key] == $selected) {
-                  $html .= '	
+                  $html .= '
                       <div class="icheck-primary d-inline">
                           <input type="radio" id="'.str_replace(' ', '_', $value).'" name="'.$name.'" value="'.$dataValue[$key].'"  checked />
                           <label for="'.str_replace(' ', '_', $value).'">
@@ -423,7 +445,7 @@ class Form extends CI_Model
                       </div>
                   ';
               }else{
-                  $html .= '	
+                  $html .= '
                       <div class="icheck-primary d-inline">
                           <input type="radio" id="'.str_replace(' ', '_', $value).'" name="'.$name.'" value="'.$dataValue[$key].'"/>
                           <label for="'.str_replace(' ', '_', $value).'">
@@ -433,23 +455,23 @@ class Form extends CI_Model
                   ';
               }
           }
-  
+
           return $html;
       }
-  
-  
+
+
       public static function radiobutton($data = ""){
           $html = '<div class="form-group clearfix">';
-  
-  
+
+
           $datavalue = $data['value'];
-  
+
           foreach ($datavalue as $key => $value) {
-  
+
               if (isset($data['checked'])) {
-  
+
                   if ($data['checked'] == $value) {
-                      
+
                       $html .= '	<div class="icheck-primary d-inline">
                                       <input type="radio" id="'.str_replace(' ', '_', $value).'" name="'.$data['name'].'" value="'.$value.'"  checked />
                                       <label for="'.str_replace(' ', '_', $value).'">
@@ -458,7 +480,7 @@ class Form extends CI_Model
                                   </div>
                           ';
                   }else{
-                      
+
                       $html .= '	<div class="icheck-primary d-inline">
                                       <input type="radio" id="'.str_replace(' ', '_', $value).'" name="'.$data['name'].'" value="'.$value.'" />
                                       <label for="'.str_replace(' ', '_', $value).'">
@@ -466,35 +488,35 @@ class Form extends CI_Model
                                       </label>
                                   </div>
                           ';
-                      
-  
+
+
                   }
-  
-                  
+
+
               }else{
-                  
+
                   $active = "";
                   if ($key == 0) {
                       $active = "checked";
                   }
-  
+
                   $html .= '	<div class="icheck-primary d-inline">
                                   <input type="radio" id="'.str_replace(' ', '_', $value).'" name="'.$data['name'].'" value="'.$value.'" '.$active.' />
                                   <label for="'.str_replace(' ', '_', $value).'">
                                       '.$value.'
                                   </label>
                               </div>';
-  
+
               }
-  
+
           }
-  
+
           $html .= '</div>';
-  
+
           return $html;
       }
-  
-      public function select($data)
+
+      public static function select($data)
       {
           $html = '<div class="form-group">';
           $html .= '	<label for="'.self::cekdata($data, 'fc').'">'.self::cekdata($data,'title').'</label>';

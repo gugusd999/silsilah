@@ -19,36 +19,42 @@
         <div class="form-element-list">
 
           <form action="<?= site_url('admin/tbl_berita/update') ?>" method="post" enctype="multipart/form-data">
-              
-        <?= 
+
+        <?=
             form::input([
                 "type" => "hidden",
                 "fc" => "id",
                 "value" => $form_data->id,
             ])
         ?>
-    
-                <?= 
+
+                <?=
                     form::input([
                         "title" => "user",
-                        "type" => "text",
+                        "type" => "hidden",
                         "fc" => "user_id",
                         "placeholder" => "tambahkan user_id",
-                        "value" => $form_data->user_id,
+                        "value" => iduser(),
                     ])
                 ?>
-            
-                <?= 
-                    form::input([
+
+                <?=
+                    form::select_db([
                         "title" => "user keluarga",
                         "type" => "text",
                         "fc" => "user_kel_id",
+                        "db" => "user_kel",
+                        "data" => "id",
+                        "name" => "nama",
                         "placeholder" => "tambahkan user_kel_id",
-                        "value" => $form_data->user_kel_id,
+                        "condition" => [
+                          "user_id" => iduser()
+                        ],
+                        "selected" => $form_data->user_kel_id,
                     ])
                 ?>
-            
-                <?= 
+
+                <?=
                     form::select_db([
                         "title" => "berita",
                         "type" => "password",
@@ -60,8 +66,8 @@
                         "selected" => $form_data->berita_id,
                     ])
                 ?>
-            
-                <?= 
+
+                <?=
                     form::input([
                         "title" => "judul",
                         "type" => "text",
@@ -70,8 +76,8 @@
                         "value" => $form_data->judul,
                     ])
                 ?>
-            
-                <?= 
+
+                <?=
                     form::input([
                         "title" => "foto",
                         "type" => "file",
@@ -80,8 +86,8 @@
                         "value" => $form_data->foto,
                     ])
                 ?>
-            
-                <?= 
+
+                <?=
                     form::editor([
                         "title" => "isi",
                         "type" => "text",
@@ -90,8 +96,8 @@
                         "value" => $form_data->isi,
                     ])
                 ?>
-            
-                <?= 
+
+                <?=
                     form::select_db([
                         "title" => "status",
                         "type" => "password",
@@ -103,7 +109,7 @@
                         "selected" => $form_data->status_id,
                     ])
                 ?>
-            
+
               <div class="form-group">
                 <button type="submit" class="btn btn-primary">Simpan</button>
                 <a class="btn btn-default" href="<?= site_url('admin/tbl_berita'); ?>">Back</a>

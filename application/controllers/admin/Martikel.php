@@ -8,7 +8,7 @@ class Martikel extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-        Cek_login::ceklogin();
+    Cek_login::ceklogin();
 		$this->load->model('Createtable');
 		$this->load->model('Datatable_gugus');
 	}
@@ -30,7 +30,7 @@ class Martikel extends CI_Controller {
 	public function table_show($action = 'show', $keyword = '')
 	{
 		if ($action == "show") {
-        
+
             if (isset($_POST['order'])): $setorder = $_POST['order']; else: $setorder = ''; endif;
 
             $this->Datatable_gugus->datatable(
@@ -111,13 +111,13 @@ class Martikel extends CI_Controller {
     public function simpan(){
         $artikel = post("artikel");
 
-        
+
 
         $simpan = $this->db->query("
             INSERT INTO martikel
             (artikel) VALUES ('$artikel')
         ");
-    
+
 
         if($simpan){
             redirect('admin/martikel');
@@ -130,11 +130,11 @@ class Martikel extends CI_Controller {
         $simpan = $this->db->query("
             UPDATE martikel SET  artikel = '$artikel' WHERE id = '$key'
             ");
-    
+
 
         if($simpan){
             redirect('admin/martikel');
         }
     }
-    
+
 }
