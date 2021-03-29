@@ -4,10 +4,21 @@
 class Database {
 
 	private $namaApss = "Magic-Framework";
-	private $hostname = 'localhost';
-    private $username = 'root';
-    private $password = '';
-    public $database = 'silsilah'; 
+	private $hostname = '192.168.161.100';
+    private $username = 'sinarmed';
+    private $password = '@Rem@n1a';
+    public $database = 'silsilakeluarga'; 
+
+
+    // Initialize
+	// $database = new Medoo([
+	//     'database_type' => 'mysql',
+	//     'database_name' => 'accounting',
+	//     'server' => '192.168.161.100',
+	//     'username' => 'sinarmed',
+	//     'password' => '@Rem@n1a'
+	// ]);
+
 	// private $namaApss = "Magic-Framework";
 	// private $hostname = '153.92.10.48';
     // private $username = 'u4960381_silsilah';
