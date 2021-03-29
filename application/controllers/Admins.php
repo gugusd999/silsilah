@@ -33,5 +33,11 @@ class Admins extends CI_Controller
 		var_dump($cc);
 	}
 
+	public function diagram()
+	{
+		$this->load->view('diagram');
+
+	}
+
 
 }

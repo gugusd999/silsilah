@@ -36,4 +36,10 @@ class Home extends CI_Controller
     {
         $this->load->view('artikel/detail');
     }
+
+    public function diagram()
+  	{
+  		$this->load->view('diagram');
+
+  	}
 }

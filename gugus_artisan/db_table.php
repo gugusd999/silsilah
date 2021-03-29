@@ -669,6 +669,37 @@ $arr[] = [
 ];
 
 $arr[] = [
+  'table' => 'fileup',
+  'data' => [
+      'id' => ai(),
+      'statkel' => char(255),
+      'file' => char(255),
+      'created_at' => timestamp(),
+      'updated_at' => timestampupdate(),
+  ],
+  'form' => [
+      'id' => 'no',
+      'statkel' => 'text',
+      'file' => 'file',
+      'created_at' => 'no',
+      'updated_at' => 'no',
+  ],
+  'name' => [
+      'no',
+      'statkel',
+      'file',
+      'dibuat',
+      'diupdate',
+  ],
+  "title" => [
+        "view" => "Master Status fileup",
+        "edit" => "Ubah Master Status fileup",
+        "new" => "Tambahkan Master Status fileup"
+    ],
+  'command' => 'php gugus template fileup --crud fileup'
+];
+
+$arr[] = [
   'table' => 'mumur',
   'data' => [
       'id' => ai(),
@@ -1357,5 +1388,7 @@ $arr[] = [
       ],
     'command' => 'php gugus template layanan --crud layanan'
   ];
+
+
     return $arr;
 }

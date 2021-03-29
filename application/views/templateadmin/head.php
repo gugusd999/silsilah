@@ -262,6 +262,8 @@
 		============================================ -->
     <link rel="stylesheet" href="<?= base_url('')?>assets/notika/css/responsive.css">
 
+    <link rel="stylesheet" href="<?= base_url('')?>assets/tree/Treant.css" />
+
     <!-- from notika -->
 
     <!-- End Footer area-->
@@ -351,6 +353,8 @@
 
     <script src="<?= base_url('');?>mc_sweetalert/sweetalert.js"></script>
     <script src="<?= base_url('')?>assets/summernote.min.js"></script>
+    <script src="<?= base_url('')?>assets/tree/vendor/raphael.js"></script>
+    <script src="<?= base_url('')?>assets/tree/Treant.js"></script>
 
     <!-- bootstrap JS
 		============================================ -->
@@ -367,6 +371,13 @@
             .paginate_button.active a{
             color: #9ca8eb !important;
             }
+
+
+            .header-top-area{
+              background-color: #007bff !important;
+            }
+
+
         </style>
 
 
@@ -383,7 +394,7 @@
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <div class="logo-area">
-                        <h3 style="color: white;">Silsilah Keluarga</h3>
+                        <h3 style="color: white;"><img src="<?= base_url('assets/logo.png');  ?>" style="height: 50px; width: auto;">&nbsp;&nbsp;&nbsp;Silsilah Keluarga</h3>
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">

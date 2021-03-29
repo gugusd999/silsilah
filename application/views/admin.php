@@ -258,7 +258,7 @@ if (browserWidth > 991) {
                          </div>
                          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                              <h4>Keluarga Baru Lahir</h4>
-                             
+
                          </div>
                          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                              <h4>Keluarga Sakit</h4>
@@ -340,3 +340,37 @@ if (browserWidth > 991) {
          </div>
      </div>
  </div>
+ <br>
+
+
+ <style id="myStyles">
+         html, body {
+     margin: 0px;
+     padding: 0px;
+     width: 100%;
+     height: 100%;
+     font-family: Helvetica;
+     overflow: hidden;
+ }
+
+ #tree {
+     width: 100%;
+     height: 100%;
+ }
+
+
+     </style>
+
+ <div class="notika-status-area">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30">
+                      <div class="website-traffic-ctn" width="100%" style="position: relative;">
+                        <div id="tree"></div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>

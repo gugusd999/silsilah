@@ -20,7 +20,7 @@
           
           <form action="<?= site_url('admin/mstatkel/simpan') ?>" method="post" enctype="multipart/form-data">
               
-                <?= 
+                <?=
                     form::input([
                         "title" => "statkel",
                         "type" => "text",

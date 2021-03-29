@@ -87,7 +87,7 @@ class Mstatkel extends CI_Controller {
         
 
         $simpan = $this->db->query("
-            INSERT INTO mstatkel            
+            INSERT INTO mstatkel
             (statkel) VALUES ('$statkel')
         ");
     
