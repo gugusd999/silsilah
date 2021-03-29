@@ -13,17 +13,99 @@ class Tbl_kegiatan extends CI_Controller {
 		$this->load->model('Datatable_gugus');
 	}
 
-	public function index()
+	public function index($limit = 0, $page = 0)
+	{
+				$pageb = 2;
+				$id = iduser();
+				$batas = 3;
+				$beforelimit = $limit;
+				$limit = $limit * $batas;
+				$next = ($limit + 2) * $batas;
+				$pagec = $page * $pageb;
+				$pageo = $page;
+				$pagem = $page - 1;
+				$pagen = $page + 1;
+				$tot = $this->db->query("SELECT * FROM tbl_kegiatan WHERE user_id = '$id'")->num_rows();
+				$pagin = ceil($tot / $batas);
+				if ($pagen >= $pagin/$pageb) {
+					$pagen = $pageo;
+				}
+				if ($pagem < $pagin/$pageb) {
+					$pagen = $pageo;
+				}
+				$show = "";
+				$pathd = site_url('admin/tbl_kegiatan/tambah_data');
+				$show .= "<br><br>";
+				$show .= "<div class='row'>";
+				foreach ($this->db->query("SELECT * FROM tbl_kegiatan WHERE user_id = '$id' limit $limit, $batas ")->result() as $key => $value) {
+					$show .= "<div class='col-md-4' style='margin-bottom: 16px;'>";
+						$show .= "<div class='card'>";
+						$path = base_url('assets/gambar/tbl_kegiatan');
+						$linkdetail = site_url('admin/tbl_kegiatan/detail');
+						$show .= "<div style=\"background-image: url('$path/$value->foto'); width: 100%; height: 18rem; background-size: cover: background-position: center; background-repeat: no-repeat; \"></div>";
+						$show .= "<h3>$value->judul</h3>";
+						$show .= "<a href=\"$linkdetail/$value->id\" class=\"btn btn-primary\" >Detail Kegiatan</a>";
+						$show .= "</div>";
+					$show .= "</div>";
+				}
+				$show .= "</div>";
+				$show .= "<div>";
+				$cx = site_url('admin/tbl_kegiatan/index');
+				$show .= "
+				<nav aria-label=\"Page navigation example\">
+				<ul class=\"pagination\">";
+				$show .= " <li class=\"page-item\"><a class=\"page-link\" href=\"$cx/$beforelimit/$pagem\">prev</a></li>";
+				for ($i=$pagec; $i < $pageb + $pagec; $i++) {
+					$cs = site_url('admin/tbl_kegiatan/index/'.$i.'/'.$pageo);
+					$show .= " <li class=\"page-item\"><a class=\"page-link\" href=\"$cs\">".($i+1)."</a></li>";
+				}
+				$show .= " <li class=\"page-item\"><a class=\"page-link\" href=\"$cx/$beforelimit/$pagen\">next</a></li>";
+				$show .= "</ul>
+				</nav>
+				";
+				$show .= "</div>";
+				$data['datatable'] = $show;
+        $this->load->view('templateadmin/head');
+        $this->load->view('admin/tbl_kegiatan/view', $data);
+        $this->load->view('templateadmin/footer');
+	}
+
+	public function detail($id)
+	{
+				$show = "";
+				$id = $id;
+				$pathd = site_url('admin/tbl_kegiatan');
+				$pathedt = site_url('admin/tbl_kegiatan/table_show/update');
+				$show .= "<div class='row'>";
+				foreach ($this->db->query("SELECT * FROM tbl_kegiatan WHERE id = '$id' ")->result() as $key => $value) {
+					$show .= "<div class='col-md-12'>";
+						$show .= "<div class='card'>";
+						$path = base_url('assets/gambar/tbl_kegiatan');
+						$show .= "<img width='100%' src=\"$path/$value->foto\"></h3>";
+						$show .= "<h3>$value->judul</h3>";
+						$show .= htmlspecialchars_decode($value->isi);
+						$show .= "<button class='btn btn-default' onclick=\"window.history.back()\" >Kembali</button>";
+						$show .= "</div>";
+					$show .= "</div>";
+				}
+				$show .= "</div>";
+				$data['datatable'] = $show;
+        $this->load->view('templateadmin/head');
+        $this->load->view('admin/tbl_kegiatan/view', $data);
+        $this->load->view('templateadmin/footer');
+	}
+
+
+	public function editor()
 	{
         $this->Createtable->location('admin/tbl_kegiatan/table_show');
         $this->Createtable->table_name('tableku');
-        $this->Createtable->create_row(["no","user","user keluarga","kegiatan","judul","foto","isi","waktu","status", "action"]);
-        $this->Createtable->order_set('0, 9');
-		$show = $this->Createtable->create();
-
-		$data['datatable'] = $show;
+        $this->Createtable->create_row(["no","judul","foto","isi","waktu","action"]);
+        $this->Createtable->order_set('0, 5');
+				$show = $this->Createtable->create();
+				$data['datatable'] = $show;
         $this->load->view('templateadmin/head');
-        $this->load->view('admin/tbl_kegiatan/view', $data);
+        $this->load->view('admin/tbl_kegiatan/editor', $data);
         $this->load->view('templateadmin/footer');
 	}
 
@@ -37,27 +119,33 @@ class Tbl_kegiatan extends CI_Controller {
                 [
                     "table" => $this->table1,
                     "select" => [
-						"*"
-					],
+											"*"
+										],
                     'limit' => [
                         'start' => post('start'),
                         'end' => post('length')
                     ],
                     'search' => [
                         'value' => $this->Datatable_gugus->search(),
-                        'row' => ["user_id","user_kel_id","kegiatan_id","judul","foto","isi","waktu","status_id"]
+                        'row' => ["judul","foto","isi","waktu"]
                     ],
                     'table-draw' => post('draw'),
                     'table-show' => [
                         'key' => 'id',
-                        'data' => ["user_id","user_kel_id","kegiatan_id","judul","foto","isi","waktu","status_id"]
+                        'data' => ["judul","foto","isi","waktu"]
                     ],
                     "action" => "standart",
                     'order' => [
                         'order-default' => ['id', 'ASC'],
                         'order-data' => $setorder,
-                        'order-option' => [ "1"=>"user_id", "2"=>"user_kel_id", "3"=>"kegiatan_id", "4"=>"judul", "5"=>"foto", "6"=>"isi", "7"=>"waktu", "8"=>"status_id"],
+                        'order-option' => [ "1"=>"judul", "2"=>"foto", "3"=>"isi", "4"=>"waktu"],
                     ],
+										"custome" => [
+											"isi" => [
+												"key" => ["id"],
+												"content" => "<a href='".site_url('admin/tbl_kegiatan/detail/')."{{id}}'>Tampilkan Kegiatan</a>"
+											]
+										]
 
                 ]
             );
@@ -97,7 +185,7 @@ class Tbl_kegiatan extends CI_Controller {
 
 
         if($simpan){
-            redirect('admin/tbl_kegiatan');
+            redirect('admin/tbl_kegiatan/editor');
         }
     }
 
@@ -117,8 +205,23 @@ $status_id = post("status_id");
 
 
         if($simpan){
-            redirect('admin/tbl_kegiatan');
+            redirect('admin/tbl_kegiatan/editor/');
         }
     }
+
+
+		public function all()
+		{
+			$this->Createtable->location('admin/tbl_kegiatan/table_show');
+			$this->Createtable->table_name('tableku');
+			$this->Createtable->create_row(["no","user","user keluarga","kegiatan","judul","foto","isi","waktu","status", "action"]);
+			$this->Createtable->order_set('0, 9');
+	$show = $this->Createtable->create();
+
+	$data['datatable'] = $show;
+			$this->load->view('templateadmin/head');
+			$this->load->view('admin/tbl_kegiatan/view', $data);
+			$this->load->view('templateadmin/footer');
+		}
 
 }

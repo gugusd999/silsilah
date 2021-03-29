@@ -30,7 +30,7 @@ function clearhtml($value='')
 function post($data)
 {
     if(isset($_POST[$data])){
-        return htmlspecialchars($_POST[$data]);
+        return  htmlspecialchars($_POST[$data]);
     }else{
         return "";
     }
@@ -174,7 +174,7 @@ function nav_link($data)
 
     if(!isset($data['cekmultiuser'])){
         $html = '
-    
+
             <li class="nav-item">
               <a href="'.site_url().''.$link.'" navigate-act nav-name="'.$navigate.'" class="nav-link">
                 <i class="nav-icon fas '.$icon.'"></i>
@@ -183,7 +183,7 @@ function nav_link($data)
                 </p>
               </a>
             </li>
-        
+
         ';
         return $html;
     }else{
@@ -191,7 +191,7 @@ function nav_link($data)
 
         if(in_array($data['cekmultiuser']['user'], $data['cekmultiuser']['cek'])) {
             $html = '
-        
+
                 <li class="nav-item">
                   <a href="'.site_url().''.$link.'" navigate-act nav-name="'.$navigate.'" class="nav-link">
                     <i class="nav-icon fas '.$icon.'"></i>
@@ -222,7 +222,7 @@ function setNavActive($data = "")
         }
         });
     </script>
-    
+
     ";
 
     return $html;

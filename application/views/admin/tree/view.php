@@ -4,7 +4,7 @@
           <div class="row">
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                   <div class="email-statis-inner notika-shadow">
-                    <h1 class="m-0 text-dark">tree</h1>
+                    <a href="<?= site_url('home/diagram') ?>" class="btn btn-primary">Lihat Diagram</a>
                   </div>
               </div>
           </div>

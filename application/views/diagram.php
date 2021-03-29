@@ -21,11 +21,52 @@
 }
 
 
+  .cdf{
+    position: fixed;
+    top:0;
+    margin: 0;
+    display: inline-block;
+    z-index: 999;
+  }
+
     </style>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
 
 </head>
 <body>
     <script src="https://balkangraph.com/js/latest/OrgChart.js"></script>
+    <div class="cdf">
+      <a href="<?= site_url('admin/user_kel'); ?>" class="btn btn-primary">Edit Keluarga</a>
+      <a href="<?= site_url('admin/tree'); ?>" class="btn btn-primary">Kembali</a>
+    </div>
+    <?php
+
+      $iduser = iduser();
+      $cc = $this->db->query("SELECT
+        a.*,
+	b.tgllahir,
+	b.nama,
+	b.foto,
+	c.id as idkel,
+	c.keluarga,
+	d.pekerjaan
+FROM
+	tree a
+	LEFT JOIN user_kel b ON a.user_kel_id = b.id
+	LEFT JOIN mkel c ON b.sebagai = c.id
+	LEFT JOIN mpekerjaan d ON b.pekerjaan_id = d.id
+WHERE
+	a.user_id = '$iduser'
+ORDER BY
+	b.tgllahir ASC")->result();
+
+     ?>
 
 <div id="tree"></div>
     <script>
@@ -51,7 +92,7 @@ window.onload = function () {
         nodeBinding: {
             field_0: 'id',
             name: "name",
-            title: "title",
+            pekerjaan: "pekerjaan",
             img: "img",
         },
         tags: {
@@ -67,27 +108,35 @@ window.onload = function () {
         }
     });
 
-    chart.load([
-            { id: 1, tags: ["blue"], name: "King George VI", img: "https://cdn.balkan.app/shared/f1.png"},
-            { id: 2, pid: 1, tags: ["partner"], name: "Queen Elizabeth", title: "The Queen Mother", img: "https://cdn.balkan.app/shared/f2.png" },
-            { id: 3, pid: 1, tags: ["blue"],  ppid: 2, name: "Queen Elizabeth II", img: "https://cdn.balkan.app/shared/f5.png"},
-            { id: 4, pid: 3, tags: ["left-partner"], name: "Prince Philip", title: "Duke of Edinburgh", img: "https://cdn.balkan.app/shared/f3.png"},
-            { id: 5, pid: 1, ppid: 2, name: "Princess Margaret", img: "https://cdn.balkan.app/shared/f6.png"},
-            { id: 6, pid: 3,tags: ["blue"], ppid: 4, name: "Charles", title: "Prince of Wales", img: "https://cdn.balkan.app/shared/f8.png"},
-            { id: 7, pid: 6, tags: ["partner"] , name: "Diana", title: "Princess of Wales", img: "https://cdn.balkan.app/shared/f9.png"},
-            { id: 8, pid: 6, tags: ["partner"], name: "Camila", title: "Duchess of Cornwall", img: "https://cdn.balkan.app/shared/f7.png" },
-            { id: 9, pid: 3, ppid: 4 , name: "Anne", title: "Princess Royal", img: "https://cdn.balkan.app/shared/f10.png"},
-            { id: 10, pid: 3, ppid: 4 , name: "Prince Andrew", title: "Duke of York", img: "https://cdn.balkan.app/shared/f11.png"},
-            { id: 11, pid: 3, ppid: 4, name: "Prince Edward", title: "Earl of Wessex", img: "https://cdn.balkan.app/shared/f12.png"},
-            { id: 12, pid: 6, ppid: 7, tags: ["blue"], name: "Prince William", title: "Duch of Cambridge", img: "https://cdn.balkan.app/shared/f14.png"},
-            { id: 13, pid: 6, ppid: 7, name: "Prince Harry", img: "https://cdn.balkan.app/shared/f15.png"},
-            { id: 14, pid: 12, tags: ["left-partner"], name: "Catherine", title: "Duchess of Cambridge", img: "https://cdn.balkan.app/shared/f13.png"},
-            { id: 15, pid: 13, tags: ["right-partner"], name: "Meghan Markle", img: "https://cdn.balkan.app/shared/f16.png"},
-            { id: 16, pid: 12, ppid: 14, tags: ["blue"], name: "Prince George of Cambridge", img: "https://cdn.balkan.app/shared/f17.png"},
-            { id: 17, pid: 12, ppid: 14, tags: ["blue"], name: "Prince Charlotte of Cambridge", img: "https://cdn.balkan.app/shared/f18.png"},
-            { id: 18, pid: 12, ppid: 14, tags: ["blue"], name: "Prince Louis of Cambridge", img: "https://cdn.balkan.app/shared/f19.png"}
-        ]);
+
+    var cd = [];
+    <?php foreach($cc as $cm => $kl) : ?>
+    <?php if($cm == 0) : ?>
+        cd.push(
+          { id: <?= $kl->id ?>, tags: ["blue"], name: "<?= $kl->nama; ?>", pekerjaan: "<?= $kl->pekerjaan; ?>", img: "<?= base_url('assets/gambar/user_kel/'.$kl->foto) ?>"}
+        );
+        <?php else : ?>
+
+        <?php if($kl->idkel == 2) : ?>
+            <?php $cp = $this->db->query("SELECT * FROM user_kel WHERE id = '$kl->child'")->row()->id; ?>
+            <?php $idchild = $this->db->query("SELECT * FROM tree WHERE user_id = '$iduser' AND user_kel_id = '$cp'")->row()->id; ?>
+            cd.push(
+              { id: <?= $kl->id ?>, pid: <?= $idchild ?>, tags: ["partner"], name: "<?= $kl->nama; ?>", pekerjaan: "<?= $kl->pekerjaan; ?>", img: "<?= base_url('assets/gambar/user_kel/'.$kl->foto) ?>"}
+            );
+          <?php else : ?>
+          <?php $cp = $this->db->query("SELECT * FROM user_kel WHERE id = '$kl->child'")->row()->id; ?>
+          <?php $idchild = $this->db->query("SELECT * FROM tree WHERE user_id = '$iduser' AND user_kel_id = '$cp'")->row()->id; ?>
+          <?php $parent = $this->db->query("SELECT * FROM tree WHERE user_id = '$iduser' AND child = '$cp' AND mkel_id = '2' ")->row()->id; ?>
+          cd.push(
+            { id: <?= $kl->id ?>, pid: <?= $idchild ?>, ppid: <?= $parent ?>, tags: ["blue"], name: "<?= $kl->nama; ?>", pekerjaan: "<?= $kl->pekerjaan; ?>", img: "<?= base_url('assets/gambar/user_kel/'.$kl->foto) ?>"}
+          );
+        <?php endif; ?>
+      <?php endif; ?>
+    <?php endforeach; ?>
+    chart.load(cd);
 };
     </script>
+    <!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </body>
 </html>

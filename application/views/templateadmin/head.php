@@ -23,11 +23,9 @@
                 "Umur" => "mumur",
                 "Status" => "mstatus",
             ],
-            "Tabel" => [
-                "Artikel" => "tbl_artikel",
-                "Berita" => "tbl_berita",
-                "Kegiatan" => "tbl_kegiatan",
-            ],
+            "Artikel" => "tbl_artikel",
+            "Berita" => "tbl_berita",
+            "Kegiatan" => "tbl_kegiatan",
             "Perusahaan" => "perusahaan",
             "Struktur Keluarga" => "tree",
             "User" => "user",
@@ -41,7 +39,9 @@
         $icon = [
             "Home" => "fa fa-home",
             "Master" => "fa fa-tags",
-            "Tabel" => "fas fa-table",
+            "Artikel" => "fas fa-newspaper",
+            "Berita" => "fas fa-newspaper",
+            "Kegiatan" => "fas fa-snowboarding",
             "Perusahaan" => "far fa-building",
             "Struktur Keluarga" => "fas fa-project-diagram",
             "User" => "fa fa-users",
@@ -69,11 +69,9 @@
                 "Umur" => "admin",
                 "Status" => "admin",
             ],
-            "Tabel" => [
-                "Artikel" => "admin",
-                "Berita" => "user",
-                "Kegiatan" => "user",
-            ],
+            "Artikel" => "admin",
+            "Berita" => "user",
+            "Kegiatan" => "user",
             "Perusahaan" => "admin",
             "Struktur Keluarga" => "user",
             "User" => "user",
@@ -617,9 +615,19 @@
                                     <?php endif; ?>
                             <?php endif; ?>
                         <?php endforeach; ?>
+                        <li>
+                            <a data-toggle="tab" href="#lain-lain" aria-expanded="true"><i class="fa fa-tags"></i>
+                                Lain-lain
+                            </a>
+                        </li>
                     </ul>
                     <div class="tab-content custom-menu-content">
 
+                      <div id="lain-lain" class="tab-pane in notika-tab-menu-bg animated flipInX">
+                          <ul class="notika-main-menu-dropdown">
+                              <li><a href="<?= site_url('admin/tbl_kegiatan/editor');?>">Kegiatan</a></li>
+                          </ul>
+                        </div>
                         <?php foreach(array_keys($menu) as $key => $val) : ?>
                             <?php if($val == $menuactive) : ?>
                                     <?php if(is_array($menu[$val])) : ?>

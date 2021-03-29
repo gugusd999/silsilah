@@ -119,11 +119,9 @@ class Tree extends CI_Controller {
 
     public function simpan(){
         $user_id = post("user_id");
-$user_kel_id = post("user_kel_id");
-$mkel_id = post("mkel_id");
-$child = post("child");
-
-
+				$user_kel_id = post("user_kel_id");
+				$mkel_id = post("mkel_id");
+				$child = post("child");
 
         $simpan = $this->db->query("
             INSERT INTO tree

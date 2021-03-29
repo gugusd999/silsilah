@@ -20,7 +20,7 @@
                     link_button([
                       "link" => "admin/mkegiatan/tambah_data",
                       "class" => "btn btn-success",
-                      "text" => "Tambah Data",
+                      "text" => "Tambah Kegiatan",
                     ]);
                   ?>
                   <hr>

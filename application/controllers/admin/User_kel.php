@@ -283,17 +283,17 @@ class User_kel extends CI_Controller {
 							user_id = '$user'
 							AND
 							user_kel_id = '$userkel'
-							AND
-							mkel_id = '$sebagai'
-							AND
-							child = '$ch'
 							 ")->num_rows() > 0) {
+
+								 echo "run";
+
 								 $this->db->query(" UPDATE
 									 tree
 									 SET
 									 user_id = '$user'
 									 , user_kel_id = '$userkel'
 									 , mkel_id = '$sebagai'
+									 , child = '$ch'
 									 	WHERE
 									 	user_id = '$user'
 		 								AND
