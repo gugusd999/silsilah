@@ -109,7 +109,7 @@ $kegiatan = post("kegiatan");
     }
 
     public function update(){
-          $key = post('id'); $user = post("user");
+          $key = post('id'); $user = iduser();
 $kegiatan = post("kegiatan");
 
         $simpan = $this->db->query("
