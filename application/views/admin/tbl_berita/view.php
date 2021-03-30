@@ -16,9 +16,9 @@
           <div class="row">
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                   <div class="email-statis-inner notika-shadow">
-                  <?php
+                 <?php
                     link_button([
-                      "link" => "admin/tbl_berita/tambah_data",
+                      "link" => "admin/mberita/tambah_data",
                       "class" => "btn btn-success",
                       "text" => "Tambah Data",
                     ]);
@@ -28,7 +28,19 @@
                   <div class="row">
                   
                   <?php if (!empty($detail)):
+                  
+                  link_button([
+                        "link" => "admin/tbl_berita/editor",
+                        "class" => "btn btn-warning",
+                      "text" => "Manage Data",
+                    ]);
+
                   echo htmlspecialchars_decode($detail);
+                  ?>
+
+                  <?php
+                  elseif(!empty($datatable)):
+                    echo $datatable;
                   ?>
 
                   <?php else: 

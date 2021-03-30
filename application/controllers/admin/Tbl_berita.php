@@ -44,7 +44,7 @@ class Tbl_berita extends CI_Controller {
                     $linkdetail = site_url('admin/tbl_berita/detail');
                     $show .= "<div style=\"background-image: url('$path/$value->foto'); width: 100%; height: 18rem; background-size: cover: background-position: center; background-repeat: no-repeat; \"></div>";
                     $show .= "<h3>$value->judul</h3>";
-                    $show .= '  <p class="card-text" align="justify">'.substr(htmlspecialchars_decode($value->isi),0,255).'.... </p>';
+                    $show .= '  <p class="card-text" align="justify">'.mb_substr(htmlspecialchars_decode($value->isi),0,255,'HTML-ENTITIES').'.... </p>';
                     $show .= "<a href=\"$linkdetail/$value->id\" class=\"btn btn-primary\" >Selengkapnya</a>";
                     $show .= "</div>";
                     $show .= "</div>";
@@ -56,13 +56,13 @@ class Tbl_berita extends CI_Controller {
 				    <nav aria-label=\"Page navigation example\">
 				    <ul class=\"pagination\">";
                     if ($beforelimit > 0) {
-                    $show .= " <li class=\"page-item\"><a class=\"page-link\" href=\"$cx/".($beforelimit-1)."/$pagen\">Previous</a></li>";
+                    $show .= " <li class=\"page-item\"><a class=\"page-link\" href=\"$cx/$beforelimit/$pagem\">prev</a></li>";
                     }
                     for ($i=$pagec; $i < $pageb + $pagec; $i++) {
                         $cs = site_url('admin/tbl_berita/index/'.$i.'/'.$pageo);
-                        $show .= " <li id=\"".($i+1)."\" class=\"page-item\"><a class=\"page-link\" href=\"$cs\">".($i+1)."</a></li>";
+                        $show .= " <li class=\"page-item\"><a class=\"page-link\" href=\"$cs\">".($i+1)."</a></li>";
                     }
-                    $show .= " <li class=\"page-item\"><a class=\"page-link\" href=\"$cx/".($beforelimit+1)."/$pagen\">next</a></li>";
+                    $show .= " <li class=\"page-item\"><a class=\"page-link\" href=\"$cx/$beforelimit/$pagen\">next</a></li>";
                     $show .= "</ul> </nav> ";
                     $show .= "</div>";
                     
@@ -192,14 +192,14 @@ $user_kel_id = post("user_kel_id");
 $berita_id = post("berita_id");
 $judul = post("judul");
 $foto = Form::getfile("foto", "assets/gambar/$this->table1/");
-$isi = post("isi");
+$isi =  post("isi");
 $status_id = post("status_id");
 
 
 
         $simpan = $this->db->query("
             INSERT INTO tbl_berita
-            (user_id,user_kel_id,berita_id,judul,foto,isi,status_id) VALUES ('$user_id','$user_kel_id','$berita_id','$judul','$foto','$isi','$status_id')
+            (user_id,user_kel_id,berita_id,judul,foto,isi,status_id) VALUES ('$user_id','$user_kel_id','$berita_id','$judul','$foto',\"$isi\",'$status_id')
         ");
 
 
