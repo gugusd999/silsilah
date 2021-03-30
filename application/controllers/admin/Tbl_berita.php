@@ -16,60 +16,63 @@ class Tbl_berita extends CI_Controller {
 
 	public function index($limit = 0, $page = 0)
 	{
-        		$id = iduser();
-				$pageb = 2;
-                $batas = 3;
-				$beforelimit = $limit;
-				$limit = $limit * $batas;
-				$next = ($limit + 2) * $batas;
-				$pagec = $page * $pageb;
-				$pageo = $page;
-				$pagem = $page - 1;
-				$pagen = $page + 1;
-				$tot = $this->db->query("SELECT * FROM tbl_berita WHERE user_id = '$id'")->num_rows();
-				$pagin = ceil($tot / $batas);
-				if ($pagen >= $pagin/$pageb) {
-					$pagen = $pageo;
-				}
-				if ($pagem < $pagin/$pageb) {
-					$pagen = $pageo;
-				}
-                $show = "";
-				$pathd = site_url('admin/tbl_berita/tambah_data');
-				$show .= "<div class='row'>";
-                foreach ($this->db->query("SELECT * FROM tbl_berita WHERE user_id = '$id' limit $limit, $batas ")->result() as $key => $value) {
-					$show .= "<div class='col-md-4' style='margin-bottom: 16px;'>";
-                    $show .= "<div class='card'>";
-                    $path = base_url('assets/gambar/tbl_berita');
-                    $linkdetail = site_url('admin/tbl_berita/detail');
-                    $show .= "<div style=\"background-image: url('$path/$value->foto'); width: 100%; height: 18rem; background-size: cover: background-position: center; background-repeat: no-repeat; \"></div>";
-                    $show .= "<h3>$value->judul</h3>";
-                    $show .= '  <p class="card-text" align="justify">'.mb_substr(htmlspecialchars_decode($value->isi),0,255,'HTML-ENTITIES').'.... </p>';
-                    $show .= "<a href=\"$linkdetail/$value->id\" class=\"btn btn-primary\" >Selengkapnya</a>";
-                    $show .= "</div>";
-                    $show .= "</div>";
-				}
-				    $show .= "</div>";
-				    $show .= "<div>";
-				    $cx = site_url('admin/tbl_berita/index');
-                    $show .= "
-				    <nav aria-label=\"Page navigation example\">
-				    <ul class=\"pagination\">";
-                    if ($beforelimit > 0) {
-                    $show .= " <li class=\"page-item\"><a class=\"page-link\" href=\"$cx/$beforelimit/$pagem\">prev</a></li>";
-                    }
-                    for ($i=$pagec; $i < $pageb + $pagec; $i++) {
-                        $cs = site_url('admin/tbl_berita/index/'.$i.'/'.$pageo);
-                        $show .= " <li class=\"page-item\"><a class=\"page-link\" href=\"$cs\">".($i+1)."</a></li>";
-                    }
-                    $show .= " <li class=\"page-item\"><a class=\"page-link\" href=\"$cx/$beforelimit/$pagen\">next</a></li>";
-                    $show .= "</ul> </nav> ";
-                    $show .= "</div>";
-                    
-                $data['list_berita'] = $show;
-                $this->load->view('templateadmin/head');
-                $this->load->view('admin/tbl_berita/view', $data);
-                $this->load->view('templateadmin/footer');
+        $pageb = 2;
+        $id = iduser();
+        $batas = 3;
+        $beforelimit = $limit;
+        $limit = $limit * $batas;
+        $next = ($limit + $pageb) * $batas;
+        $pagec = $page * $pageb;
+        $pageo = $page;
+        $pagem = $page - 1;
+        $pagen = $page + 1;
+        $tot = $this->db->query("SELECT * FROM tbl_berita WHERE user_id = '$id'")->num_rows();
+        $pagin = ceil($tot / $batas);
+        if ($pagin < $pageb) {
+          $pageb = $pagin;
+        }
+        if ($pagen >= $pagin/$pageb) {
+          $pagen = $pageo;
+        }
+        if ($pagem < 0) {
+          $pagem = $pageo;
+        }
+        $show = "";
+        $pathd = site_url('admin/tbl_berita/tambah_data');
+        $show .= "<br><br>";
+        $show .= "<div class='row'>";
+        foreach ($this->db->query("SELECT * FROM tbl_berita WHERE user_id = '$id' limit $limit, $batas ")->result() as $key => $value) {
+          $show .= "<div class='col-md-4' style='margin-bottom: 16px; padding: 20px;'>";
+            $show .= "<div class='card text-center hover-card' style='margin: 10px; width: auto; box-shadow: 0px 0px 20px rgba(123,123,123,0.3); padding-bottom: 16px; border-radius: 10px; overflow: hidden;'>";
+            $path = base_url('assets/gambar/tbl_berita');
+            $linkdetail = site_url('admin/tbl_berita/detail');
+            $show .= "<div style=\"background-image: url('$path/$value->foto'); width: 100%; height: 18rem; background-size: cover: background-position: center; background-repeat: no-repeat; \"></div>";
+            $show .= "<h4 style=\"margin-top: 10px; margin-bottom: 10px; padding: 16px;\">$value->judul</h4>";
+            $show .= '<p class="text-justify">'.mb_substr(htmlspecialchars_decode($value->isi),0,255,'HTML-ENTITIES').'.... </p>';
+            $show .= "<a href=\"$linkdetail/$value->id\" class=\"btn btn-success\" >Selengkapnya</a>";
+            $show .= "</div>";
+          $show .= "</div>";
+        }
+        $show .= "</div>";
+        $show .= "<div>";
+        $cx = site_url('admin/tbl_berita/index');
+        $show .= "
+        <nav aria-label=\"Page navigation example\">
+        <ul class=\"pagination\">";
+        $show .= " <li class=\"page-item\"><a class=\"page-link\" href=\"$cx/$beforelimit/$pagem\">prev</a></li>";
+        for ($i=$pagec; $i < $pageb + $pagec; $i++) {
+          $cs = site_url('admin/tbl_berita/index/'.$i.'/'.$pageo);
+          $show .= " <li class=\"page-item\"><a class=\"page-link\" href=\"$cs\">".($i+1)."</a></li>";
+        }
+        $show .= " <li class=\"page-item\"><a class=\"page-link\" href=\"$cx/$beforelimit/$pagen\">next</a></li>";
+        $show .= "</ul>
+        </nav>
+        ";
+        $show .= "</div>";
+        $data['list_berita'] = $show;
+        $this->load->view('templateadmin/head');
+        $this->load->view('admin/tbl_berita/view', $data);
+        $this->load->view('templateadmin/footer');
 	}
 
 
