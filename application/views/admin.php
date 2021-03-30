@@ -152,6 +152,7 @@ if (browserWidth > 991) {
                         <?php
                           $c = iduser();
                           $cc = $this->db->query("SELECT * FROM user WHERE id = '$c' ")->row()->foto;
+                          $credential = $this->db->query("SELECT * FROM user_kel WHERE id = '$c' ")->row()->id_kel;
                          ?>
                          <img src="<?= base_url('assets/gambar/user/'.$cc) ?>" width="100%" alt="">
                      </div>
@@ -163,20 +164,43 @@ if (browserWidth > 991) {
                          <h4>Data Keluarga Saya, <?= $this->db->query("SELECT * FROM user_kel WHERE user_id = '$c'")->num_rows();?></h4>
                          <div class="row">
                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                             <h5>Keluarga Besar</h5>
                              <ul>
-                               <li>Saudara Perempuan</li>
-                               <li>Saudara Laki Laki</li>
-                               <li>Istri/ Suami</li>
-                               <li>Anak</li>
+                               <?php foreach ($this->db->query("SELECT DISTINCT(mkel.keluarga) from
+                                 user_kel LEFT JOIN mkel ON user_kel.sebagai = mkel.id
+                                 where user_id = $c and id_kel = $credential order by user_kel.tgllahir ASC ")->result() as $key => $kUtama): ?>
+                               <li>
+                                 <div class="row">
+                                   <div class="col-md-6">
+                                     <?= $kUtama->keluarga ?>
+                                   </div>
+                                   <div class="col-md-6">
+                                     <?= $this->db->query("SELECT count(mkel.keluarga) as jumlah from user_kel LEFT JOIN mkel ON user_kel.sebagai = mkel.id where id_kel = $credential and mkel.keluarga = '$kUtama->keluarga' ")->row()
+                                     ->jumlah ?>
+                                   </div>
+                                 </div>
+                              </li>
+                             <?php endforeach; ?>
                              </ul>
                            </div>
                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                             <h5>Keluarga Utama</h5>
                              <ul>
-                               <li>Sepupu Perempuan</li>
-                               <li>Sepupu Laki Laki</li>
-                               <li>Ipar Perempuan</li>
-                               <li>Ipar Laki Laki</li>
-                               <li>Ponakan</li>
+                               <?php foreach ($this->db->query("SELECT DISTINCT(mkel.keluarga) from
+                                 user_kel LEFT JOIN mkel ON user_kel.sebagai = mkel.id
+                                 where user_id = $c and id_kel <> $credential and id_kel <> '' order by user_kel.tgllahir ASC ")->result() as $key => $kUtama): ?>
+                               <li>
+                                 <div class="row">
+                                   <div class="col-md-6">
+                                     <?= str_replace('Ibu','Istri',$kUtama->keluarga) ?>
+                                   </div>
+                                   <div class="col-md-6">
+                                     <?= $this->db->query("SELECT count(mkel.keluarga) as jumlah from user_kel LEFT JOIN mkel ON user_kel.sebagai = mkel.id where id_kel = $c and mkel.keluarga = '$kUtama->keluarga'")->row()
+                                     ->jumlah ?>
+                                   </div>
+                                 </div>
+                              </li>
+                             <?php endforeach; ?>
                              </ul>
                            </div>
                          </div>
