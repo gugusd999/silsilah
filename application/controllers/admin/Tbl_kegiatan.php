@@ -14,61 +14,61 @@ class Tbl_kegiatan extends CI_Controller {
 	}
 
 	public function index($limit = 0, $page = 0)
-	{
-				$pageb = 2;
-				$id = iduser();
-				$batas = 3;
-				$beforelimit = $limit;
-				$limit = $limit * $batas;
-				$next = ($limit + 2) * $batas;
-				$pagec = $page * $pageb;
-				$pageo = $page;
-				$pagem = $page - 1;
-				$pagen = $page + 1;
-				$tot = $this->db->query("SELECT * FROM tbl_kegiatan WHERE user_id = '$id'")->num_rows();
-				$pagin = ceil($tot / $batas);
-				if ($pagen >= $pagin/$pageb) {
-					$pagen = $pageo;
-				}
-				if ($pagem < $pagin/$pageb) {
-					$pagen = $pageo;
-				}
-				$show = "";
-				$pathd = site_url('admin/tbl_kegiatan/tambah_data');
-				$show .= "<br><br>";
-				$show .= "<div class='row'>";
-				foreach ($this->db->query("SELECT * FROM tbl_kegiatan WHERE user_id = '$id' limit $limit, $batas ")->result() as $key => $value) {
-					$show .= "<div class='col-md-4' style='margin-bottom: 16px;'>";
-						$show .= "<div class='card'>";
-						$path = base_url('assets/gambar/tbl_kegiatan');
-						$linkdetail = site_url('admin/tbl_kegiatan/detail');
-						$show .= "<div style=\"background-image: url('$path/$value->foto'); width: 100%; height: 18rem; background-size: cover: background-position: center; background-repeat: no-repeat; \"></div>";
-						$show .= "<h3>$value->judul</h3>";
-						$show .= "<a href=\"$linkdetail/$value->id\" class=\"btn btn-primary\" >Detail Kegiatan</a>";
-						$show .= "</div>";
-					$show .= "</div>";
-				}
-				$show .= "</div>";
-				$show .= "<div>";
-				$cx = site_url('admin/tbl_kegiatan/index');
-				$show .= "
-				<nav aria-label=\"Page navigation example\">
-				<ul class=\"pagination\">";
-				$show .= " <li class=\"page-item\"><a class=\"page-link\" href=\"$cx/$beforelimit/$pagem\">prev</a></li>";
-				for ($i=$pagec; $i < $pageb + $pagec; $i++) {
-					$cs = site_url('admin/tbl_kegiatan/index/'.$i.'/'.$pageo);
-					$show .= " <li class=\"page-item\"><a class=\"page-link\" href=\"$cs\">".($i+1)."</a></li>";
-				}
-				$show .= " <li class=\"page-item\"><a class=\"page-link\" href=\"$cx/$beforelimit/$pagen\">next</a></li>";
-				$show .= "</ul>
-				</nav>
-				";
-				$show .= "</div>";
-				$data['datatable'] = $show;
+  {
+        $pageb = 2;
+        $id = iduser();
+        $batas = 3;
+        $beforelimit = $limit;
+        $limit = $limit * $batas;
+        $next = ($limit + 2) * $batas;
+        $pagec = $page * $pageb;
+        $pageo = $page;
+        $pagem = $page - 1;
+        $pagen = $page + 1;
+        $tot = $this->db->query("SELECT * FROM tbl_kegiatan WHERE user_id = '$id'")->num_rows();
+        $pagin = ceil($tot / $batas);
+        if ($pagen >= $pagin/$pageb) {
+          $pagen = $pageo;
+        }
+        if ($pagem < 0) {
+          $pagem = $pageo;
+        }
+        $show = "";
+        $pathd = site_url('admin/tbl_kegiatan/tambah_data');
+        $show .= "<br><br>";
+        $show .= "<div class='row'>";
+        foreach ($this->db->query("SELECT * FROM tbl_kegiatan WHERE user_id = '$id' limit $limit, $batas ")->result() as $key => $value) {
+          $show .= "<div class='col-md-4' style='margin-bottom: 16px;'>";
+            $show .= "<div class='card'>";
+            $path = base_url('assets/gambar/tbl_kegiatan');
+            $linkdetail = site_url('admin/tbl_kegiatan/detail');
+            $show .= "<div style=\"background-image: url('$path/$value->foto'); width: 100%; height: 18rem; background-size: cover: background-position: center; background-repeat: no-repeat; \"></div>";
+            $show .= "<h3>$value->judul</h3>";
+            $show .= "<a href=\"$linkdetail/$value->id\" class=\"btn btn-primary\" >Detail Kegiatan</a>";
+            $show .= "</div>";
+          $show .= "</div>";
+        }
+        $show .= "</div>";
+        $show .= "<div>";
+        $cx = site_url('admin/tbl_kegiatan/index');
+        $show .= "
+        <nav aria-label=\"Page navigation example\">
+        <ul class=\"pagination\">";
+        $show .= " <li class=\"page-item\"><a class=\"page-link\" href=\"$cx/$beforelimit/$pagem\">prev</a></li>";
+        for ($i=$pagec; $i < $pageb + $pagec; $i++) {
+          $cs = site_url('admin/tbl_kegiatan/index/'.$i.'/'.$pageo);
+          $show .= " <li class=\"page-item\"><a class=\"page-link\" href=\"$cs\">".($i+1)."</a></li>";
+        }
+        $show .= " <li class=\"page-item\"><a class=\"page-link\" href=\"$cx/$beforelimit/$pagen\">next</a></li>";
+        $show .= "</ul>
+        </nav>
+        ";
+        $show .= "</div>";
+        $data['datatable'] = $show;
         $this->load->view('templateadmin/head');
         $this->load->view('admin/tbl_kegiatan/view', $data);
         $this->load->view('templateadmin/footer');
-	}
+  }
 
 	public function detail($id)
 	{
