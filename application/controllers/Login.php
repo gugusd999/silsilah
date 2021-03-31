@@ -3,6 +3,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
+
+//Load Composer's autoloader
+require 'vendor/autoload.php';
 
 class Login extends CI_Controller
 {
@@ -81,51 +85,41 @@ class Login extends CI_Controller
 		$email = post("email");
 		$status_id = post("status_id");
 
-		$config = [
-			'mailtype'  => 'html',
-			'charset'   => 'utf-8',
-			'protocol'  => 'smtp',
-			'smtp_host' => 'kediamanku.com',
-			'smtp_user' => 'no_reply@kediamanku.com',  // Email gmail
-			'smtp_pass'   => 'silsilahkeluarga',  // Password gmail
-			'smtp_crypto' => 'ssl',
-			'smtp_port'   => 465,
-			'crlf'    => "\r\n",
-			'newline' => "\r\n"
-		];
+		$mailer = new PHPMailer(true);
+		try {
+			$mailer->SMTPDebug = SMTP::DEBUG_SERVER;
+            $mailer->isSMTP();
+            $mailer->Host       = 'kediamanku.com';   
+            $mailer->SMTPAuth   = true;
+            $mailer->Username   = 'no_reply@kediamanku.com'; // silahkan ganti dengan alamat email Anda
+            $mailer->Password   = 'silsilahkeluarga'; // silahkan ganti dengan password email Anda
+            $mailer->SMTPSecure = 'ssl';
+            $mailer->Port       = 465;
 
-		// Load library email dan konfigurasinya
-        $this->load->library('email', $config);
-
-        // Email dan nama pengirim
-        $this->email->from('no_reply@kediamanku.com', 'AdminKediamanku');
-
-        // Email penerima
-        $this->email->to("$email"); // Ganti dengan email tujuan
-
-		// Subject email
-        $this->email->subject('Selamat Datang');
-
-        // Isi email
-        $this->email->message("Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa at nam dolorum consequuntur blanditiis! Aliquam incidunt culpa voluptatem, illum harum deserunt iusto nostrum, voluptatibus sed, id dolorum quam omnis distinctio.");
-
-        // Tampilkan pesan sukses atau error
-        if ($this->email->send()) {
-            echo 'Sukses! email berhasil dikirim.';
-        } else {
-            echo 'Error! email tidak dapat dikirim.';
-        }
-
-    $simpan = $this->db->query("
-        INSERT INTO user
-        (username,password,nama,hp,namaayah,namaibu,email,status_id) VALUES ('$username','$password','$nama','$hp','$namaayah','$namaibu','$email','$status_id')
-    ");
-
-		if($simpan){
-			$getid = $this->db->query("SELECT * FROM user ORDER BY id DESC")->row()->id;
-			create_session('loginid', $getid);
-			create_session('login', 'user');
-			// redirect('admin/user');
+			$mailer->setFrom('no_reply@kediamanku.com', 'Admin Silsilah'); // silahkan ganti dengan alamat email Anda
+            $mailer->addAddress($email);
+            $mailer->addReplyTo('no_reply@kediamanku.com', 'Admin Silsilah'); // silahkan ganti dengan alamat email Anda
+            // Content
+            $mailer->isHTML(false);
+            $mailer->Subject = "Info Pendaftaran";
+            $mailer->Body    = "Selamat anda sudah terdaftar";
+ 
+            $mailer->send();
+            // session()->setFlashdata('success', 'Send Email successfully');
+		} catch (Exception $e) {
+			echo $mailer->ErrorInfo;
 		}
+
+    // $simpan = $this->db->query("
+    //     INSERT INTO user
+    //     (username,password,nama,hp,namaayah,namaibu,email,status_id) VALUES ('$username','$password','$nama','$hp','$namaayah','$namaibu','$email','$status_id')
+    // ");
+
+	// 	if($simpan){
+	// 		$getid = $this->db->query("SELECT * FROM user ORDER BY id DESC")->row()->id;
+	// 		create_session('loginid', $getid);
+	// 		create_session('login', 'user');
+	// 		// redirect('admin/user');
+	// 	}
 	}
 }
