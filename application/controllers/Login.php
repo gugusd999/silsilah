@@ -105,21 +105,20 @@ class Login extends CI_Controller
             $mailer->Body    = "Selamat anda sudah terdaftar";
  
             $mailer->send();
-            // session()->setFlashdata('success', 'Send Email successfully');
+			$simpan = $this->db->query("
+				    INSERT INTO user
+				    (username,password,nama,hp,namaayah,namaibu,email,status_id) VALUES ('$username','$password','$nama','$hp','$namaayah','$namaibu','$email','$status_id')
+				");
+
+					if($simpan){
+						$getid = $this->db->query("SELECT * FROM user ORDER BY id DESC")->row()->id;
+						create_session('loginid', $getid);
+						create_session('login', 'user');
+						redirect('admin/user');
+					}
+					
 		} catch (Exception $e) {
 			echo $mailer->ErrorInfo;
 		}
-
-    // $simpan = $this->db->query("
-    //     INSERT INTO user
-    //     (username,password,nama,hp,namaayah,namaibu,email,status_id) VALUES ('$username','$password','$nama','$hp','$namaayah','$namaibu','$email','$status_id')
-    // ");
-
-	// 	if($simpan){
-	// 		$getid = $this->db->query("SELECT * FROM user ORDER BY id DESC")->row()->id;
-	// 		create_session('loginid', $getid);
-	// 		create_session('login', 'user');
-	// 		// redirect('admin/user');
-	// 	}
 	}
 }
