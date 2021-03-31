@@ -20,7 +20,7 @@
           
           <form action="<?= site_url('admin/user/simpan') ?>" method="post" enctype="multipart/form-data">
               
-                <?= 
+                <?=
                     form::input([
                         "title" => "username",
                         "type" => "username",
@@ -29,7 +29,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::input([
                         "title" => "password",
                         "type" => "password",
@@ -38,7 +38,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::input([
                         "title" => "nama",
                         "type" => "text",
@@ -47,7 +47,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::input([
                         "title" => "hp",
                         "type" => "text",
@@ -56,7 +56,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::input([
                         "title" => "namaayah",
                         "type" => "text",
@@ -65,7 +65,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::input([
                         "title" => "namaibu",
                         "type" => "text",
@@ -74,7 +74,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::input([
                         "title" => "email",
                         "type" => "email",
@@ -83,7 +83,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::input([
                         "title" => "status",
                         "type" => "text",

@@ -20,7 +20,17 @@
           
           <form action="<?= site_url('admin/mkegiatan/simpan') ?>" method="post" enctype="multipart/form-data">
               
-                <?= 
+                <?=
+                    form::input([
+                        "title" => "user",
+                        "type" => "hidden",
+                        "fc" => "user",
+                        "placeholder" => "tambahkan user",
+                        "value" => iduser(),
+                    ])
+                ?>
+            
+                <?=
                     form::input([
                         "title" => "kegiatan",
                         "type" => "text",

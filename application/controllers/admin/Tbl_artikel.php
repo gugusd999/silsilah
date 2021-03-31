@@ -114,7 +114,7 @@ $status_id = post("status_id");
         
 
         $simpan = $this->db->query("
-            INSERT INTO tbl_artikel            
+            INSERT INTO tbl_artikel
             (artikel_id,judul,slug,foto,deskripsi,content,status_id) VALUES ('$artikel_id','$judul','$slug','$foto','$deskripsi','$content','$status_id')
         ");
     

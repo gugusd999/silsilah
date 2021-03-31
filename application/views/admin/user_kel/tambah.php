@@ -263,6 +263,9 @@
                         "db" => "user_kel",
                         "data" => "id",
                         "name" => "nama",
+                        "condition" => [
+                          "user_id" => iduser()
+                        ]
                     ])
                 ?>
 

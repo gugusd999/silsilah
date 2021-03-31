@@ -20,7 +20,7 @@
           
           <form action="<?= site_url('admin/service/simpan') ?>" method="post" enctype="multipart/form-data">
               
-                <?= 
+                <?=
                     form::input([
                         "title" => "title",
                         "type" => "text",
@@ -29,7 +29,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::input([
                         "title" => "icon",
                         "type" => "text",
@@ -38,7 +38,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::input([
                         "title" => "deskripsi",
                         "type" => "text",

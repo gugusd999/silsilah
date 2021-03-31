@@ -89,7 +89,7 @@ $deskripsi = post("deskripsi");
         
 
         $simpan = $this->db->query("
-            INSERT INTO testimony            
+            INSERT INTO testimony
             (foto,nama,deskripsi) VALUES ('$foto','$nama','$deskripsi')
         ");
     

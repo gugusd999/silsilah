@@ -20,7 +20,7 @@
           
           <form action="<?= site_url('admin/tree/simpan') ?>" method="post" enctype="multipart/form-data">
               
-                <?= 
+                <?=
                     form::input([
                         "title" => "User",
                         "type" => "hidden",
@@ -30,7 +30,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::select_db([
                         "title" => "User Keluarga",
                         "type" => "password",
@@ -42,7 +42,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::select_db([
                         "title" => "Sebagai",
                         "type" => "password",
@@ -54,7 +54,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::select_db([
                         "title" => "Child",
                         "type" => "password",

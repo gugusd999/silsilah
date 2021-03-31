@@ -20,7 +20,7 @@
 
           <form action="<?= site_url('admin/mberita/update') ?>" method="post" enctype="multipart/form-data">
               
-        <?= 
+        <?=
             form::input([
                 "type" => "hidden",
                 "fc" => "id",
@@ -28,7 +28,17 @@
             ])
         ?>
     
-                <?= 
+                <?=
+                    form::input([
+                        "title" => "user",
+                        "type" => "hidden",
+                        "fc" => "user",
+                        "placeholder" => "tambahkan user",
+                        "value" => iduser(),
+                    ])
+                ?>
+            
+                <?=
                     form::input([
                         "title" => "berita",
                         "type" => "text",

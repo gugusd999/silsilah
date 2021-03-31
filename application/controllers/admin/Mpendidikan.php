@@ -87,7 +87,7 @@ class Mpendidikan extends CI_Controller {
         
 
         $simpan = $this->db->query("
-            INSERT INTO mpendidikan            
+            INSERT INTO mpendidikan
             (pendidikan) VALUES ('$pendidikan')
         ");
     

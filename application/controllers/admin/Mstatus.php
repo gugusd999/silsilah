@@ -87,7 +87,7 @@ class Mstatus extends CI_Controller {
         
 
         $simpan = $this->db->query("
-            INSERT INTO mstatus            
+            INSERT INTO mstatus
             (status) VALUES ('$status')
         ");
     

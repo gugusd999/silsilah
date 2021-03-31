@@ -20,7 +20,7 @@
           
           <form action="<?= site_url('admin/testimony/simpan') ?>" method="post" enctype="multipart/form-data">
               
-                <?= 
+                <?=
                     form::input([
                         "title" => "foto",
                         "type" => "file",
@@ -29,7 +29,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::input([
                         "title" => "nama",
                         "type" => "text",
@@ -38,7 +38,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::input([
                         "title" => "Deskripsi",
                         "type" => "text",

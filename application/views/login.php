@@ -12,7 +12,7 @@ $this->load->view("template/navbar");
         <div class="container">
 
             <div class="section-title">
-                <h2>Login</h2>
+                <h2><?= $title ?></h2>
             </div>
             <div class="row mt-5 justify-content-md-center ">
                 <div class="col-lg-5 mt-5 mt-lg-0 ">
@@ -25,7 +25,7 @@ $this->load->view("template/navbar");
                         }else{
                             $ur .= "admin/login/prosses";
                         }
-                    
+
                     ?>
                     <form action="<?= $ur ?>" method="post"  enctype="multipart/form-data" >
                         <div class="form-group">
@@ -38,7 +38,7 @@ $this->load->view("template/navbar");
                         </div>
                         <div class="mb-3">
                             <div class="small">Lupa Password?</div>
-                            <div class="small">Login Sebagai Keluarga</div>
+                            <div class="small">Login <a href="<?=  site_url('login/kelurga'); ?>">Sebagai Keluarga</a></div>
                         </div>
                         <div class="text-center"><button class="btn-sky-blue" type="submit">Login</button></div>
                     </form>

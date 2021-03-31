@@ -20,7 +20,7 @@
           
           <form action="<?= site_url('admin/perusahaan/simpan') ?>" method="post" enctype="multipart/form-data">
               
-                <?= 
+                <?=
                     form::input([
                         "title" => "nama",
                         "type" => "text",
@@ -29,7 +29,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::input([
                         "title" => "alamat",
                         "type" => "text",
@@ -38,7 +38,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::input([
                         "title" => "email",
                         "type" => "text",
@@ -47,7 +47,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::input([
                         "title" => "telephone",
                         "type" => "text",
@@ -56,7 +56,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::input([
                         "title" => "handphone",
                         "type" => "text",
@@ -65,7 +65,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::input([
                         "title" => "instagram",
                         "type" => "text",
@@ -74,7 +74,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::input([
                         "title" => "facebook",
                         "type" => "text",
@@ -83,7 +83,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::input([
                         "title" => "twitter",
                         "type" => "text",

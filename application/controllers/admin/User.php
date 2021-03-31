@@ -61,6 +61,16 @@ class User extends CI_Controller {
                         'order-data' => $setorder,
                         'order-option' => [ "1"=>"foto","2"=>"username", "3"=>"password", "4"=>"nama", "5"=>"hp", "6"=>"namaayah", "7"=>"namaibu", "8"=>"email", "9"=>"status_id", "10"=>"created_at", "11"=>"updated_at"],
                     ],
+										"custome" => [
+											'status_id' => [
+							            'replacerow' => [
+							                'table' => 'mstatus',
+							                'condition' => ['id'],
+							                'value' => ['status_id'],
+							                'get' => 'status',
+							            ],
+							        ],
+										]
 
                 ]
             );

@@ -1,4 +1,4 @@
-<?php
+	<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Mberita extends CI_Controller {
@@ -17,8 +17,8 @@ class Mberita extends CI_Controller {
 	{
         $this->Createtable->location('admin/mberita/table_show');
         $this->Createtable->table_name('tableku');
-        $this->Createtable->create_row(["no","user","berita","status", "action"]);
-        $this->Createtable->order_set('0, 4');
+        $this->Createtable->create_row(["no","berita", "action"]);
+        $this->Createtable->order_set('0, 2');
 		$show = $this->Createtable->create();
 
 		$data['datatable'] = $show;
@@ -39,6 +39,9 @@ class Mberita extends CI_Controller {
                     "select" => [
 						"*"
 					],
+					"where" => [
+							["user", '=', iduser()]
+					],
                     'limit' => [
                         'start' => post('start'),
                         'end' => post('length')
@@ -50,50 +53,14 @@ class Mberita extends CI_Controller {
                     'table-draw' => post('draw'),
                     'table-show' => [
                         'key' => 'id',
-                        'data' => ["user","berita","status_id"]
+                        'data' => ["berita"]
                     ],
                     "action" => "standart",
                     'order' => [
                         'order-default' => ['id', 'ASC'],
                         'order-data' => $setorder,
-                        'order-option' => [ "1"=>"user", "2"=>"berita", "3"=>"status_id"],
-                    ],
-                     'custome' => [
-											 'user' => [
- 							            'replacerow' => [
- 							                'table' => 'user',
- 							                'condition' => ['id'],
- 							                'value' => ['user'],
- 							                'get' => 'nama',
- 							            ],
- 							        ],
-        'status_id' => [
-            'key' => ['status_id', 'id'],
-            'content' => "
-                <div class='toggle-select-act fm-cmp-mg'>
-                    <div class='nk-toggle-switch'>
-                        <input id='check{{id}}' checked type='checkbox' value='{{status_id}}' hidden='hidden'>
-                        <label for='check{{id}}' class='ts-helper'></label>
-                    </div>
-                </div>
-                <script>
-
-                    $(document).ready(function(){
-
-                        var newd = document.getElementById('check{{id}}');
-
-                        if(newd.value != '1'){
-                            newd.removeAttribute('checked');
-                        }
-                        newd.addEventListener('change', function(){
-                            alert('ok')
-                        }, false)
-                    })
-
-                </script>
-            "
-        ]
-    ],
+                        'order-option' => [ "1"=>"berita"],
+				    				],
                 ]
             );
             $this->Datatable_gugus->table_show();

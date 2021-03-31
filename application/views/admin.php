@@ -10,11 +10,15 @@ text-align: center;
 <div class="notika-status-area">
   <div class="container">
 <div class="row">
+  <?php $idus = iduser();
+
+  ?>
+<?php if ($this->db->query("SELECT * FROM user_kel WHERE user_id = '$idus' ")->num_rows() > 0): ?>
+
+
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
 <!-- Indicators -->
 <ol class="carousel-indicators">
-<?php $idus = iduser();
- ?>
 <?php foreach($this->db->query("SELECT * FROM user_kel WHERE user_id = '$idus' ")->result() as $key => $val) : ?>
 <?php if ($key == 0): ?>
   <li data-target="#myCarousel" data-slide-to="<?= $key; ?>" class="active"></li>
@@ -68,6 +72,8 @@ text-align: center;
 </div>
 </div>
  </div>
+<?php endif; ?>
+
 <br>
 
 <script type="text/javascript">
@@ -152,7 +158,10 @@ if (browserWidth > 991) {
                         <?php
                           $c = iduser();
                           $cc = $this->db->query("SELECT * FROM user WHERE id = '$c' ")->row()->foto;
-                          $credential = $this->db->query("SELECT * FROM user_kel WHERE id = '$c' ")->row()->id_kel;
+                          $credential = NULL;
+                          if ($this->db->query("SELECT * FROM user_kel WHERE id = '$c' ")->num_rows() > 0) {
+                            $credential = $this->db->query("SELECT * FROM user_kel WHERE id = '$c' ")->row()->id_kel;
+                          }
                          ?>
                          <img src="<?= base_url('assets/gambar/user/'.$cc) ?>" width="100%" alt="">
                      </div>
@@ -166,26 +175,30 @@ if (browserWidth > 991) {
                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                              <h5>Keluarga Besar</h5>
                              <ul>
-                               <?php foreach ($this->db->query("SELECT DISTINCT(mkel.keluarga) from
+                               <?php if ($credential != NULL): ?>
+                                 <?php foreach ($this->db->query("SELECT DISTINCT(mkel.keluarga) from
                                  user_kel LEFT JOIN mkel ON user_kel.sebagai = mkel.id
                                  where user_id = $c and id_kel = $credential order by user_kel.tgllahir ASC ")->result() as $key => $kUtama): ?>
-                               <li>
-                                 <div class="row">
-                                   <div class="col-md-6">
-                                     <?= $kUtama->keluarga ?>
+                                 <li>
+                                   <div class="row">
+                                     <div class="col-md-6">
+                                       <?= $kUtama->keluarga ?>
+                                     </div>
+                                     <div class="col-md-6">
+                                       <?= $this->db->query("SELECT count(mkel.keluarga) as jumlah from user_kel LEFT JOIN mkel ON user_kel.sebagai = mkel.id where id_kel = $credential and mkel.keluarga = '$kUtama->keluarga' ")->row()
+                                       ->jumlah ?>
+                                     </div>
                                    </div>
-                                   <div class="col-md-6">
-                                     <?= $this->db->query("SELECT count(mkel.keluarga) as jumlah from user_kel LEFT JOIN mkel ON user_kel.sebagai = mkel.id where id_kel = $credential and mkel.keluarga = '$kUtama->keluarga' ")->row()
-                                     ->jumlah ?>
-                                   </div>
-                                 </div>
-                              </li>
-                             <?php endforeach; ?>
+                                 </li>
+                               <?php endforeach; ?>
+                               <?php endif; ?>
                              </ul>
                            </div>
                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                              <h5>Keluarga Utama</h5>
                              <ul>
+                               <?php if ($credential != NULL): ?>
+
                                <?php foreach ($this->db->query("SELECT DISTINCT(mkel.keluarga) from
                                  user_kel LEFT JOIN mkel ON user_kel.sebagai = mkel.id
                                  where user_id = $c and id_kel <> $credential and id_kel <> '' order by user_kel.tgllahir ASC ")->result() as $key => $kUtama): ?>
@@ -201,6 +214,7 @@ if (browserWidth > 991) {
                                  </div>
                               </li>
                              <?php endforeach; ?>
+                           <?php endif; ?>
                              </ul>
                            </div>
                          </div>
@@ -280,6 +294,11 @@ if (browserWidth > 991) {
                          <?php foreach ($this->db->query("SELECT * FROM mkegiatan")->result() as $key => $value): ?>
                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                              <h4><?= $value->kegiatan ?></h4>
+                             <ul>
+                               <?php foreach ($this->db->query("SELECT * FROM tbl_kegiatan WHERE user_id = '".iduser()."' AND kegiatan_id = '$value->id' ")->result() as $key => $ff): ?>
+                                 <li><?= $key + 1; ?>. <a href="<?= site_url('admin/tbl_kegiatan/detail/'.$ff->id); ?>"><?= $ff->judul ?></a></li>
+                               <?php endforeach; ?>
+                             </ul>
                            </div>
                          <?php endforeach; ?>
                        </div>

@@ -20,7 +20,7 @@
 
           <form action="<?= site_url('admin/service/update') ?>" method="post" enctype="multipart/form-data">
               
-        <?= 
+        <?=
             form::input([
                 "type" => "hidden",
                 "fc" => "id",
@@ -28,7 +28,7 @@
             ])
         ?>
     
-                <?= 
+                <?=
                     form::input([
                         "title" => "title",
                         "type" => "text",
@@ -38,7 +38,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::input([
                         "title" => "icon",
                         "type" => "text",
@@ -48,7 +48,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::input([
                         "title" => "deskripsi",
                         "type" => "text",

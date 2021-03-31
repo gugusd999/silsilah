@@ -89,7 +89,7 @@ $link = post("link");
         
 
         $simpan = $this->db->query("
-            INSERT INTO sosmed            
+            INSERT INTO sosmed
             (title,icon,link) VALUES ('$title','$icon','$link')
         ");
     

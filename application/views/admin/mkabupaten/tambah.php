@@ -20,7 +20,7 @@
           
           <form action="<?= site_url('admin/mkabupaten/simpan') ?>" method="post" enctype="multipart/form-data">
               
-                <?= 
+                <?=
                     form::input([
                         "title" => "id",
                         "type" => "text",
@@ -29,7 +29,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::input([
                         "title" => "province",
                         "type" => "text",
@@ -38,7 +38,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::input([
                         "title" => "name",
                         "type" => "text",

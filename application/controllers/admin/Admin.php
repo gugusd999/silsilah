@@ -9,8 +9,8 @@ class Admin extends CI_Controller {
 	{
 		parent::__construct();
         Cek_login::ceklogin();
-				$this->load->model('Createtable');
-				$this->load->model('Datatable_gugus');
+		$this->load->model('Createtable');
+		$this->load->model('Datatable_gugus');
 	}
 
 	public function index()
@@ -30,34 +30,35 @@ class Admin extends CI_Controller {
 	public function table_show($action = 'show', $keyword = '')
 	{
 		if ($action == "show") {
-
+        
             if (isset($_POST['order'])): $setorder = $_POST['order']; else: $setorder = ''; endif;
 
             $this->Datatable_gugus->datatable(
-	            		[
+                [
                     "table" => $this->table1,
                     "select" => [
-										"*"
-									],
-	                'limit' => [
-	                    'start' => post('start'),
-	                    'end' => post('length')
-	                ],
-	                'search' => [
-	                    'value' => $this->Datatable_gugus->search(),
-	                    'row' => ["username","password","nama","status_id"]
-	                ],
-	                'table-draw' => post('draw'),
-	                'table-show' => [
-	                    'key' => 'id',
-	                    'data' => ["username","password","nama","status_id"]
-	                ],
-	                "action" => "standart",
-	                'order' => [
-	                    'order-default' => ['id', 'ASC'],
-	                    'order-data' => $setorder,
-	                    'order-option' => [ "1"=>"username", "2"=>"password", "3"=>"nama", "4"=>"status_id"],
-	                ],
+						"*"
+					],
+                    'limit' => [
+                        'start' => post('start'),
+                        'end' => post('length')
+                    ],
+                    'search' => [
+                        'value' => $this->Datatable_gugus->search(),
+                        'row' => ["username","password","nama","status_id"]
+                    ],
+                    'table-draw' => post('draw'),
+                    'table-show' => [
+                        'key' => 'id',
+                        'data' => ["username","password","nama","status_id"]
+                    ],
+                    "action" => "standart",
+                    'order' => [
+                        'order-default' => ['id', 'ASC'],
+                        'order-data' => $setorder,
+                        'order-option' => [ "1"=>"username", "2"=>"password", "3"=>"nama", "4"=>"status_id"],
+                    ],
+                    
                 ]
             );
             $this->Datatable_gugus->table_show();
@@ -82,15 +83,18 @@ class Admin extends CI_Controller {
 
     public function simpan(){
         $id = post("id");
-				$username = post("username");
-				$password = post("password");
-				$nama = post("nama");
-				$status_id = post("status_id");
+$username = post("username");
+$password = post("password");
+$nama = post("nama");
+$status_id = post("status_id");
+
+        
+
         $simpan = $this->db->query("
             INSERT INTO admin
             (id,username,password,nama,status_id) VALUES ('$id','$username','$password','$nama','$status_id')
         ");
-
+    
 
         if($simpan){
             redirect('admin/admin');
@@ -107,11 +111,11 @@ $status_id = post("status_id");
         $simpan = $this->db->query("
             UPDATE admin SET  id = '$id', username = '$username', password = '$password', nama = '$nama', status_id = '$status_id' WHERE id = '$key'
             ");
-
+    
 
         if($simpan){
             redirect('admin/admin');
         }
     }
-
+    
 }

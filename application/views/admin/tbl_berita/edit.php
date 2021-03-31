@@ -64,6 +64,9 @@
                         "data" => "id",
                         "name" => "berita",
                         "selected" => $form_data->berita_id,
+                        "condition" => [
+                          "user" => iduser()
+                        ]
                     ])
                 ?>
 

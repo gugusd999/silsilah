@@ -16,9 +16,9 @@ class Tbl_berita extends CI_Controller {
 
 	public function index($limit = 0, $page = 0)
 	{
-        $pageb = 2;
+        $pageb = 5;
         $id = iduser();
-        $batas = 3;
+        $batas = 6;
         $beforelimit = $limit;
         $limit = $limit * $batas;
         $next = ($limit + $pageb) * $batas;
@@ -31,9 +31,13 @@ class Tbl_berita extends CI_Controller {
         if ($pagin < $pageb) {
           $pageb = $pagin;
         }
-        if ($pagen >= $pagin/$pageb) {
-          $pagen = $pageo;
-        }
+				if ($pagin != 0) {
+					if ($pagen >= $pagin/$pageb) {
+						$pagen = $pageo;
+					}
+				}else{
+					$pagen = $pageo;
+				}
         if ($pagem < 0) {
           $pagem = $pageo;
         }
@@ -106,15 +110,15 @@ class Tbl_berita extends CI_Controller {
 	{
         $this->Createtable->location('admin/tbl_berita/table_show');
         $this->Createtable->table_name('tableku');
-        $this->Createtable->create_row(["no","user","user keluarga","berita","judul","foto","isi","waktu","status", "action"]);
-        $this->Createtable->order_set('0, 9');
+        $this->Createtable->create_row(["no","judul","foto","isi","waktu", "action"]);
+        $this->Createtable->order_set('0, 5');
 	    	$show = $this->Createtable->create();
 
 		    $data['datatable'] = $show;
 
 
         $this->load->view('templateadmin/head');
-        $this->load->view('admin/tbl_berita/view', $data);
+        $this->load->view('admin/tbl_berita/editor', $data);
         $this->load->view('templateadmin/footer');
 	}
 
@@ -130,43 +134,34 @@ class Tbl_berita extends CI_Controller {
                     "select" => [
 						"*"
 					],
+					"where" => [
+							["user_id", '=', iduser()]
+					],
                     'limit' => [
                         'start' => post('start'),
                         'end' => post('length')
                     ],
                     'search' => [
                         'value' => $this->Datatable_gugus->search(),
-                        'row' => ["user_id","user_kel_id","berita_id","judul","foto","isi","waktu","status_id"]
+                        'row' => ["judul","foto","isi","waktu"]
                     ],
                     'table-draw' => post('draw'),
                     'table-show' => [
                         'key' => 'id',
-                        'data' => ["user_id","user_kel_id","berita_id","judul","foto","isi","waktu","status_id"]
+                        'data' => ["judul","foto","isi","waktu"]
                     ],
                     "action" => "standart",
                     'order' => [
                         'order-default' => ['id', 'ASC'],
                         'order-data' => $setorder,
-                        'order-option' => [ "1"=>"user_id", "2"=>"user_kel_id", "3"=>"berita_id", "4"=>"judul", "5"=>"foto", "6"=>"isi", "7"=>"waktu", "8"=>"status_id"],
+                        'order-option' => [ "1"=>"judul", "2"=>"foto", "3"=>"isi", "4"=>"waktu"],
                     ],
-                     'custome' => [
-        'berita_id' => [
-            'replacerow' => [
-                'table' => 'mberita',
-                'condition' => ['id'],
-                'value' => ['berita_id'],
-                'get' => 'berita',
-            ],
-        ],
-        'status_id' => [
-            'replacerow' => [
-                'table' => 'mstatus',
-                'condition' => ['id'],
-                'value' => ['status_id'],
-                'get' => 'status',
-            ],
-        ]
-    ],
+									 "custome" => [
+										 "isi" => [
+											 "key" => ["id"],
+											 "content" => "<a href='".site_url('admin/tbl_berita/detail/')."{{id}}'>Tampilkan Berita</a>"
+										 ]
+    					 			],
                 ]
             );
             $this->Datatable_gugus->table_show();

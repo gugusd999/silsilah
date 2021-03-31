@@ -87,7 +87,7 @@ class Mprovinsi extends CI_Controller {
         
 
         $simpan = $this->db->query("
-            INSERT INTO mprovinsi            
+            INSERT INTO mprovinsi
             (name) VALUES ('$name')
         ");
     

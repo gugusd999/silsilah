@@ -1,4 +1,12 @@
 <br>
+<style media="screen">
+.hover-card{
+  transition: 0.3s;
+}
+.hover-card:hover{
+  box-shadow: 5px 15px 25px rgba(123,123,123,0.5) !important;
+}
+</style>
 <div class="notika-email-post-area">
       <div class="container">
           <div class="row">
@@ -16,24 +24,11 @@
           <div class="row">
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                   <div class="email-statis-inner notika-shadow">
-                 <?php
-                    link_button([
-                      "link" => "admin/mberita/tambah_data",
-                      "class" => "btn btn-success",
-                      "text" => "Tambah Data",
-                    ]);
-                  ?>
-                  <hr>
                   <!-- Start Card -->
                   <div class="row">
-                  
+
                   <?php if (!empty($detail)):
-                  
-                  link_button([
-                        "link" => "admin/tbl_berita/editor",
-                        "class" => "btn btn-warning",
-                      "text" => "Manage Data",
-                    ]);
+
 
                   echo htmlspecialchars_decode($detail);
                   ?>
@@ -43,8 +38,8 @@
                     echo $datatable;
                   ?>
 
-                  <?php else: 
-                    echo $list_berita;  
+                  <?php else:
+                    echo $list_berita;
                   ?>
                   </div>
 

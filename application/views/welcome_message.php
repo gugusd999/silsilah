@@ -88,7 +88,7 @@ $this->load->view("template/navbar");
 					<div class="icon-box">
 						<div class="icon"><i class="bx bx-atom"></i></div>
 						<h4 class="title"><a href="">Event khusus keluarga</a></h4>
-						<p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis hic soluta, error consectetur exercitationem odit vero eaque adipisci.</p>
+						<p class="description">Kami berkomitmen membantu dalam memberikan informasi yang akurat serta eksklusif dalam menyatukan setiap keluarga yang ada, anda juga dapat membuat event khusus untuk reuni atau temu keluarga.</p>
 					</div>
 
 				</div>
@@ -102,24 +102,24 @@ $this->load->view("template/navbar");
 		<div class="container">
 
 			<div class="text-center title">
-				<h3>Lorem ipsum dolor sit amet.</h3>
-				<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure?</p>
+				<h3>Lebih dari 120 orang telah membuat silsilah mereka</h3>
+				<p>Buat sekarang silsilah khusus Keluarga anda</p>
 			</div>
 
 			<div class="row counters">
 
 				<div class="col-lg-4 col-6 text-center">
-					<span data-toggle="counter-up">232</span>
+					<span data-toggle="counter-up"><?= $this->db->query("SELECT * FROM user")->num_rows(); ?></span>
 					<p>Profile</p>
 				</div>
 
 				<div class="col-lg-4 col-6 text-center">
-					<span data-toggle="counter-up">521</span>
+					<span data-toggle="counter-up"><?= $this->db->query("SELECT * FROM user_kel")->num_rows(); ?></span>
 					<p>User</p>
 				</div>
 
 				<div class="col-lg-4 col-6 text-center">
-					<span data-toggle="counter-up">1,463</span>
+					<span data-toggle="counter-up"><?= $this->db->query("SELECT * FROM user")->num_rows(); ?></span>
 					<p>Pohon Keluarga</p>
 				</div>
 
@@ -133,8 +133,8 @@ $this->load->view("template/navbar");
 		<div class="container">
 
 			<div class="section-title">
-				<h2>Services</h2>
-				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, eum quam molestias veritatis expedita similique natus laborum enim quod molestiae ad iure impedit, voluptatibus architecto libero quaerat autem suscipit. Facilis saepe esse rerum suscipit numquam eum dolorum accusantium, sequi neque!</p>
+				<h2>Layanan</h2>
+				<p>Kami melayani anda dengan sepenuh hati.</p>
 			</div>
 
 			<div class="row">

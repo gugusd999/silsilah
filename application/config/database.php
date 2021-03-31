@@ -67,7 +67,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | The $active_group variable lets you choose which connection group to
 | make active.  By default there is only one group (the 'default' group).
 |
-| The $query_builder variables lets you determine whether or not to load
 | the query builder class.
 */
 $active_group = 'default';
@@ -75,19 +74,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '192.168.161.100',
-	'username' => 'sinarmed',
-	'password' => '@Rem@n1a',
-	'database' => 'silsilakeluarga',
-	// private $namaApss = "Magic-Framework";
-	// private $hostname = '192.168.161.100';
-    // private $username = 'sinarmed';
-    // private $password = '@Rem@n1a';
-    // public $database = 'silsilakeluarga'; 
-	// 'hostname' => '153.92.10.48',
-	// 'username' => 'u4960381_silsilah',
-	// 'password' => 'silsilah',
-	// 'database' => 'u4960381_silsilah2',
+	'hostname' => '153.92.10.48',
+	'username' => 'u4960381_silsilah',
+	'password' => 'silsilah',
+	'database' => 'u4960381_silsilah2',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

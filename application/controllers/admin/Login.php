@@ -22,13 +22,14 @@ class Login extends CI_Controller
 	 */
 	public function index()
 	{
+        $data['title'] = "Login Admin";
         $data['admin'] = "admin";
-		$this->load->view('login', $data);
+				$this->load->view('login', $data);
 	}
 
 	public function prosses()
 	{
-		
+
 		// default password admin
 
 		$username = $_POST['username'];
@@ -36,7 +37,7 @@ class Login extends CI_Controller
 
 
 		if ($username == $this->username && $password == $this->password) {
-	
+
 			create_session('login', 'admin');
 
 			return redirect('admin/magama');

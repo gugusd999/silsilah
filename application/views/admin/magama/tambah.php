@@ -20,7 +20,7 @@
           
           <form action="<?= site_url('admin/magama/simpan') ?>" method="post" enctype="multipart/form-data">
               
-                <?= 
+                <?=
                     form::input([
                         "title" => "agama",
                         "type" => "text",

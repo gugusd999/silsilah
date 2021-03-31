@@ -20,7 +20,7 @@
           
           <form action="<?= site_url('admin/mkel/simpan') ?>" method="post" enctype="multipart/form-data">
               
-                <?= 
+                <?=
                     form::input([
                         "title" => "keluarga",
                         "type" => "text",
@@ -29,7 +29,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::select_db([
                         "title" => "jenis kelamin",
                         "type" => "password",

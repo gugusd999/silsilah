@@ -20,7 +20,7 @@
 
           <form action="<?= site_url('admin/martikel/update') ?>" method="post" enctype="multipart/form-data">
               
-        <?= 
+        <?=
             form::input([
                 "type" => "hidden",
                 "fc" => "id",
@@ -28,7 +28,7 @@
             ])
         ?>
     
-                <?= 
+                <?=
                     form::input([
                         "title" => "artikel",
                         "type" => "text",

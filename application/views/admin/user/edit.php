@@ -99,19 +99,6 @@
                 ?>
 
                 <?=
-                    form::select_db([
-                        "title" => "status",
-                        "type" => "text",
-                        "fc" => "status_id",
-                        "placeholder" => "tambahkan status_id",
-                        "db" => "mstatus",
-                        "data" => "id",
-                        "name" => "status",
-                        "selected" => $form_data->status_id,
-                    ])
-                ?>
-
-                <?=
                     form::input([
                         "title" => "foto",
                         "type" => "file",

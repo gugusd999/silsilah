@@ -89,7 +89,7 @@ $link = post("link");
         
 
         $simpan = $this->db->query("
-            INSERT INTO service            
+            INSERT INTO service
             (title,icon,link) VALUES ('$title','$icon','$link')
         ");
     

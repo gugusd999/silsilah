@@ -20,7 +20,7 @@
         <div class="container ">
             <div class="row">
 
-                <div class="col-lg-3 col-md-6 footer-contact">
+                <div class="col-lg-4 col-md-6 footer-contact">
                     <h3><?= Perusahaans::get()->nama; ?></h3>
                     <p>
                         <?= Perusahaans::get()->alamat; ?>
@@ -29,35 +29,24 @@
                     </p>
                 </div>
 
-                <div class="col-lg-3 col-md-6 footer-links">
-                    <h4>Link Berguna</h4>
+                <div class="col-lg-4 col-md-6 footer-links">
+                    <h4>Link</h4>
                     <ul>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Artikel</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Login</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="<?= site_url('/'); ?>">Home</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="<?= site_url('artikel'); ?>">Artikel</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="<?= site_url('login'); ?>">Login</a></li>
                         <!-- <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
                         <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li> -->
                     </ul>
                 </div>
 
-                <div class="col-lg-3 col-md-6 footer-links">
-                    <h4>Our Services</h4>
-                    <ul>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-                        <!-- <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li> -->
-                    </ul>
-                </div>
-
-                <div class="col-lg-3 col-md-6 footer-links">
+                <div class="col-lg-4 col-md-6 footer-links">
                     <h4>Sosial Media</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur.</p>
+                    <p>Kunjungi Sosial Media Kami</p>
                     <div class="social-links mt-3">
-                        <a href="<?= Perusahaans::get()->tw; ?>" class="twitter"><i class="bx bxl-twitter"></i></a>
-                        <a href="<?= Perusahaans::get()->fb; ?>" class="facebook"><i class="bx bxl-facebook"></i></a>
-                        <a href="<?= Perusahaans::get()->ig; ?>" class="instagram"><i class="bx bxl-instagram"></i></a>
+                        <?php foreach ($this->db->query("SELECT * FROM sosmed")->result() as $key => $value): ?>
+                          <a href="<?= $value->link; ?>" class="<?= $value->title; ?>"><i class="bx bxl-<?= $value->icon; ?>"></i></a>
+                        <?php endforeach; ?>
                         <!-- <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
                         <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a> -->
                     </div>
@@ -69,7 +58,7 @@
 
     <div class="container py-4">
         <div class="copyright">
-            &copy; Copyright <strong><span>Medcon</span></strong>. All Rights Reserved
+            &copy; Copyright <strong><span><?= Perusahaans::get()->nama; ?></span></strong>. All Rights Reserved
         </div>
         <div class="credits">
             <!-- All the links in the footer should remain intact. -->

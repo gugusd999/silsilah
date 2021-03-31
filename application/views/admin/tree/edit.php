@@ -20,7 +20,7 @@
 
           <form action="<?= site_url('admin/tree/update') ?>" method="post" enctype="multipart/form-data">
               
-        <?= 
+        <?=
             form::input([
                 "type" => "hidden",
                 "fc" => "id",
@@ -28,17 +28,17 @@
             ])
         ?>
     
-                <?= 
+                <?=
                     form::input([
                         "title" => "User",
                         "type" => "hidden",
                         "fc" => "user_id",
                         "placeholder" => "tambahkan user_id",
-                        "value" => generate_session("datalogin")["id"],
+                        "value" => iduser(),
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::select_db([
                         "title" => "User Keluarga",
                         "type" => "password",
@@ -51,7 +51,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::select_db([
                         "title" => "Sebagai",
                         "type" => "password",
@@ -64,7 +64,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::select_db([
                         "title" => "Child",
                         "type" => "password",

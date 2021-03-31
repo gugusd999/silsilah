@@ -17,8 +17,8 @@ class Perusahaan extends CI_Controller {
 	{
         $this->Createtable->location('admin/perusahaan/table_show');
         $this->Createtable->table_name('tableku');
-        $this->Createtable->create_row(["no","nama","alamat","email","telephone","handphone","instagram","facebook","twitter", "action"]);
-        $this->Createtable->order_set('0, 9');
+        $this->Createtable->create_row(["no","nama","alamat","email","telephone","handphone", "action"]);
+        $this->Createtable->order_set('0, 6');
 		$show = $this->Createtable->create();
 
 		$data['datatable'] = $show;
@@ -30,7 +30,7 @@ class Perusahaan extends CI_Controller {
 	public function table_show($action = 'show', $keyword = '')
 	{
 		if ($action == "show") {
-        
+
             if (isset($_POST['order'])): $setorder = $_POST['order']; else: $setorder = ''; endif;
 
             $this->Datatable_gugus->datatable(
@@ -45,20 +45,20 @@ class Perusahaan extends CI_Controller {
                     ],
                     'search' => [
                         'value' => $this->Datatable_gugus->search(),
-                        'row' => ["nama","alamat","email","tlpn","hp","ig","fb","tw"]
+                        'row' => ["nama","alamat","email","tlpn","hp"]
                     ],
                     'table-draw' => post('draw'),
                     'table-show' => [
                         'key' => 'id',
-                        'data' => ["nama","alamat","email","tlpn","hp","ig","fb","tw"]
+                        'data' => ["nama","alamat","email","tlpn","hp"]
                     ],
                     "action" => "standart",
                     'order' => [
                         'order-default' => ['id', 'ASC'],
                         'order-data' => $setorder,
-                        'order-option' => [ "1"=>"nama", "2"=>"alamat", "3"=>"email", "4"=>"tlpn", "5"=>"hp", "6"=>"ig", "7"=>"fb", "8"=>"tw"],
+                        'order-option' => [ "1"=>"nama", "2"=>"alamat", "3"=>"email", "4"=>"tlpn", "5"=>"hp"],
                     ],
-                    
+
                 ]
             );
             $this->Datatable_gugus->table_show();
@@ -69,7 +69,8 @@ class Perusahaan extends CI_Controller {
             $this->load->view('admin/perusahaan/edit', $data);
             $this->load->view('templateadmin/footer');
         }elseif ($action == "delete") {
-            $hapus_data = $this->db->query("DELETE FROM ".$this->table1." WHERE id = '".post("id")."'");
+					redirect('admin/perusahaan');
+            // $hapus_data = $this->db->query("DELETE FROM ".$this->table1." WHERE id = '".post("id")."'");
         }
     }
 
@@ -91,13 +92,13 @@ $ig = post("ig");
 $fb = post("fb");
 $tw = post("tw");
 
-        
+
 
         $simpan = $this->db->query("
-            INSERT INTO perusahaan            
+            INSERT INTO perusahaan
             (nama,alamat,email,tlpn,hp,ig,fb,tw) VALUES ('$nama','$alamat','$email','$tlpn','$hp','$ig','$fb','$tw')
         ");
-    
+
 
         if($simpan){
             redirect('admin/perusahaan');
@@ -117,11 +118,11 @@ $tw = post("tw");
         $simpan = $this->db->query("
             UPDATE perusahaan SET  nama = '$nama', alamat = '$alamat', email = '$email', tlpn = '$tlpn', hp = '$hp', ig = '$ig', fb = '$fb', tw = '$tw' WHERE id = '$key'
             ");
-    
+
 
         if($simpan){
             redirect('admin/perusahaan');
         }
     }
-    
+
 }

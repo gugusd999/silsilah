@@ -35,3 +35,14 @@ function iduser($name = "", $defaultnull = "")
         return '';
     }
 }
+
+
+function cek($data = [], $name = '')
+{
+    if(isset($data->$name)){
+        return $data->$name;
+    }else{
+        return "";
+    }
+}
+

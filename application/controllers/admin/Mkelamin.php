@@ -87,7 +87,7 @@ class Mkelamin extends CI_Controller {
         
 
         $simpan = $this->db->query("
-            INSERT INTO mkelamin            
+            INSERT INTO mkelamin
             (kelamin) VALUES ('$kelamin')
         ");
     

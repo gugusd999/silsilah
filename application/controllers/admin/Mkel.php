@@ -97,7 +97,7 @@ $kelamin_id = post("kelamin_id");
         
 
         $simpan = $this->db->query("
-            INSERT INTO mkel            
+            INSERT INTO mkel
             (keluarga,kelamin_id) VALUES ('$keluarga','$kelamin_id')
         ");
     

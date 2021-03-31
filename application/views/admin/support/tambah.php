@@ -20,7 +20,7 @@
           
           <form action="<?= site_url('admin/support/simpan') ?>" method="post" enctype="multipart/form-data">
               
-                <?= 
+                <?=
                     form::input([
                         "title" => "foto",
                         "type" => "file",
@@ -29,7 +29,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::input([
                         "title" => "nama",
                         "type" => "text",

@@ -176,7 +176,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Dashboard One | Notika - Notika Admin Template</title>
+    <title>  <?= Perusahaans::get()->nama; ?></title>
+    <link href="<?= base_url('assets/') ?>logo.jpg" rel="icon">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -184,7 +185,6 @@
     <!-- favicon
 
 		============================================ -->
-    <link rel="shortcut icon" type="image/x-icon" href="<?= base_url('');?>assets/notika/img/favicon.ico">
     <!-- Google Fonts
 		============================================ -->
     <link href="<?= base_url('');?>assets/notika/https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900"
@@ -345,7 +345,6 @@
     <script src="<?= base_url('')?>assets/notika/js/main.js"></script>
 	<!-- tawk chat JS
 		============================================ -->
-    <script src="<?= base_url('')?>assets/notika/js/tawk-chat.js"></script>
 
 
 
@@ -625,6 +624,7 @@
 
                       <div id="lain-lain" class="tab-pane in notika-tab-menu-bg animated flipInX">
                           <ul class="notika-main-menu-dropdown">
+                              <li><a href="<?= site_url('admin/tbl_berita/editor');?>">Berita</a></li>
                               <li><a href="<?= site_url('admin/tbl_kegiatan/editor');?>">Kegiatan</a></li>
                           </ul>
                         </div>
@@ -666,35 +666,4 @@
             </div>
         </div>
     </div>
-    <!-- Main Menu area End-->
-    <!-- Start Status area -->
-    <div class="notika-status-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                    <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30">
-                        <div class="website-traffic-ctn">
-                            <h2><span class="counter">20</span></h2>
-                            <p>Total keluarga</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                    <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30">
-                        <div class="website-traffic-ctn">
-                            <h2><span class="counter">30</span></h2>
-                            <p>Kegiatan</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                    <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30 dk-res-mg-t-30">
-                        <div class="website-traffic-ctn">
-                            <h2><span class="counter">25</span></h2>
-                            <p>Berita</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+  

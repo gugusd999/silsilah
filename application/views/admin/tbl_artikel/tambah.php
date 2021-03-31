@@ -20,7 +20,7 @@
           
           <form action="<?= site_url('admin/tbl_artikel/simpan') ?>" method="post" enctype="multipart/form-data">
               
-                <?= 
+                <?=
                     form::select_db([
                         "title" => "artikel",
                         "type" => "password",
@@ -32,7 +32,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::input([
                         "title" => "judul",
                         "type" => "text",
@@ -41,7 +41,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::input([
                         "title" => "foto",
                         "type" => "file",
@@ -50,7 +50,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::input([
                         "title" => "deskripsi",
                         "type" => "text",
@@ -59,7 +59,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::editor([
                         "title" => "content",
                         "type" => "text",
@@ -68,7 +68,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::select_db([
                         "title" => "status",
                         "type" => "password",

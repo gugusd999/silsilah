@@ -20,7 +20,7 @@
           
           <form action="<?= site_url('admin/mstatus/simpan') ?>" method="post" enctype="multipart/form-data">
               
-                <?= 
+                <?=
                     form::input([
                         "title" => "status",
                         "type" => "text",

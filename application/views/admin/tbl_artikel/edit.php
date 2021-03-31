@@ -20,7 +20,7 @@
 
           <form action="<?= site_url('admin/tbl_artikel/update') ?>" method="post" enctype="multipart/form-data">
               
-        <?= 
+        <?=
             form::input([
                 "type" => "hidden",
                 "fc" => "id",
@@ -28,7 +28,7 @@
             ])
         ?>
     
-                <?= 
+                <?=
                     form::select_db([
                         "title" => "artikel",
                         "type" => "password",
@@ -41,7 +41,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::input([
                         "title" => "judul",
                         "type" => "text",
@@ -51,7 +51,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::input([
                         "title" => "foto",
                         "type" => "file",
@@ -61,7 +61,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::input([
                         "title" => "deskripsi",
                         "type" => "text",
@@ -71,7 +71,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::editor([
                         "title" => "content",
                         "type" => "text",
@@ -81,7 +81,7 @@
                     ])
                 ?>
             
-                <?= 
+                <?=
                     form::select_db([
                         "title" => "status",
                         "type" => "password",

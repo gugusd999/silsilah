@@ -17,8 +17,8 @@ class Mkegiatan extends CI_Controller {
 	{
         $this->Createtable->location('admin/mkegiatan/table_show');
         $this->Createtable->table_name('tableku');
-        $this->Createtable->create_row(["no","user","kegiatan", "action"]);
-        $this->Createtable->order_set('0, 3');
+        $this->Createtable->create_row(["no","kegiatan", "action"]);
+        $this->Createtable->order_set('0, 2');
 		$show = $this->Createtable->create();
 
 		$data['datatable'] = $show;
@@ -39,35 +39,29 @@ class Mkegiatan extends CI_Controller {
                     "select" => [
 						"*"
 					],
+					"where" => [
+							["user", '=', iduser()]
+					],
+
                     'limit' => [
                         'start' => post('start'),
                         'end' => post('length')
                     ],
                     'search' => [
                         'value' => $this->Datatable_gugus->search(),
-                        'row' => ["user","kegiatan"]
+                        'row' => ["kegiatan"]
                     ],
                     'table-draw' => post('draw'),
                     'table-show' => [
                         'key' => 'id',
-                        'data' => ["user","kegiatan"]
+                        'data' => ["kegiatan"]
                     ],
                     "action" => "standart",
                     'order' => [
                         'order-default' => ['id', 'ASC'],
                         'order-data' => $setorder,
-                        'order-option' => [ "1"=>"user", "2"=>"kegiatan"],
+                        'order-option' => ["1"=>"kegiatan"],
                     ],
-										"custome" => [
-											'user' => [
-												 'replacerow' => [
-														 'table' => 'user',
-														 'condition' => ['id'],
-														 'value' => ['user'],
-														 'get' => 'nama',
-												 ],
-										 ],
-										]
 
                 ]
             );

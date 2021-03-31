@@ -20,7 +20,7 @@
           
           <form action="<?= site_url('admin/mprovinsi/simpan') ?>" method="post" enctype="multipart/form-data">
               
-                <?= 
+                <?=
                     form::input([
                         "title" => "name",
                         "type" => "text",

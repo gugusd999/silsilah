@@ -29,21 +29,38 @@
                         "value" => iduser(),
                     ])
                 ?>
-
-                <?=
+                <?php if (generate_session('loginkelid') != ""): ?>
+                    <?=
                     form::select_db([
-                        "title" => "user keluarga",
-                        "type" => "text",
-                        "fc" => "user_kel_id",
-                        "db" => "user_kel",
-                        "data" => "id",
-                        "name" => "nama",
-                        "placeholder" => "tambahkan user_kel_id",
-                        "condition" => [
-                          "user_id" => iduser()
-                        ]
+                      "title" => "user keluarga",
+                      "type" => "text",
+                      "fc" => "user_kel_id",
+                      "db" => "user_kel",
+                      "data" => "id",
+                      "name" => "nama",
+                      "placeholder" => "tambahkan user_kel_id",
+                      "condition" => [
+                        "user_id" => iduser()
+                      ],
+                      "selected" => generate_session('loginkelid')
                     ])
-                ?>
+                    ?>
+                  <?php else: ?>
+                    <?=
+                    form::select_db([
+                      "title" => "user keluarga",
+                      "type" => "text",
+                      "fc" => "user_kel_id",
+                      "db" => "user_kel",
+                      "data" => "id",
+                      "name" => "nama",
+                      "placeholder" => "tambahkan user_kel_id",
+                      "condition" => [
+                        "user_id" => iduser()
+                      ]
+                    ])
+                    ?>
+                <?php endif; ?>
 
                 <?=
                     form::select_db([

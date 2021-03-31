@@ -54,6 +54,9 @@
                         "db" => "mberita",
                         "data" => "id",
                         "name" => "berita",
+                        "condition" => [
+                          "user" => iduser()
+                        ]
                     ])
                 ?>
 

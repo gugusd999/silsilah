@@ -20,7 +20,7 @@
           
           <form action="<?= site_url('admin/mpendidikan/simpan') ?>" method="post" enctype="multipart/form-data">
               
-                <?= 
+                <?=
                     form::input([
                         "title" => "pendidikan",
                         "type" => "text",

@@ -250,6 +250,7 @@
                         "type" => "username",
                         "fc" => "username",
                         "placeholder" => "tambahkan username",
+                        "value" => $form_data->username,
                     ])
                 ?>
 
@@ -309,6 +310,9 @@
                         "data" => "id",
                         "name" => "nama",
                         "selected" => $form_data->id_kel,
+                        "condition" => [
+                          "user_id" => iduser()
+                        ]
                     ])
                 ?>
 

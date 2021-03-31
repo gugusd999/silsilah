@@ -87,7 +87,7 @@ class Mumur extends CI_Controller {
         
 
         $simpan = $this->db->query("
-            INSERT INTO mumur            
+            INSERT INTO mumur
             (umur) VALUES ('$umur')
         ");
     

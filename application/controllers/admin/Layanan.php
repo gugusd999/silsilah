@@ -89,7 +89,7 @@ $description = post("description");
         
 
         $simpan = $this->db->query("
-            INSERT INTO layanan            
+            INSERT INTO layanan
             (title,icon,description) VALUES ('$title','$icon','$description')
         ");
     

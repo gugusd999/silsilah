@@ -98,7 +98,7 @@ $name = post("name");
         
 
         $simpan = $this->db->query("
-            INSERT INTO mkabupaten            
+            INSERT INTO mkabupaten
             (id,province_id,name) VALUES ('$id','$province_id','$name')
         ");
     
